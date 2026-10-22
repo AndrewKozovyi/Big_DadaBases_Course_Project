@@ -43,3 +43,7 @@ x86/
 
 # Publish Web Output
 *.[Pp]ublish.xml
+
+# SSRS: кеш даних Preview і облікові дані користувача
+*.rdl.data
+*.rsuser

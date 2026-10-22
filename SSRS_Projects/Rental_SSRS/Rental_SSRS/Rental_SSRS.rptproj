@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <FullPath>Debug</FullPath>
+    <OutputPath>bin\Debug</OutputPath>
+    <ErrorLevel>2</ErrorLevel>
+    <OverwriteDatasets>True</OverwriteDatasets>
+    <OverwriteDataSources>False</OverwriteDataSources>
+    <TargetServerVersion>SSRS2016</TargetServerVersion>
+    <Platform>Win32</Platform>
+    <TargetReportFolder>Rental_SSRS/Звіти</TargetReportFolder>
+    <TargetDatasetFolder>Rental_SSRS/Datasets</TargetDatasetFolder>
+    <TargetDatasourceFolder>Rental_SSRS/Data Sources</TargetDatasourceFolder>
+    <TargetReportPartFolder>Rental_SSRS/Report Parts</TargetReportPartFolder>
+    <TargetServerURL>http://localhost/reportserver</TargetServerURL>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'DebugLocal' ">
+    <FullPath>DebugLocal</FullPath>
+    <OutputPath>bin\DebugLocal</OutputPath>
+    <ErrorLevel>2</ErrorLevel>
+    <OverwriteDatasets>True</OverwriteDatasets>
+    <OverwriteDataSources>False</OverwriteDataSources>
+    <TargetServerVersion>SSRS2016</TargetServerVersion>
+    <Platform>Win32</Platform>
+    <TargetReportFolder>Rental_SSRS/Звіти</TargetReportFolder>
+    <TargetDatasetFolder>Rental_SSRS/Datasets</TargetDatasetFolder>
+    <TargetDatasourceFolder>Rental_SSRS/Data Sources</TargetDatasourceFolder>
+    <TargetReportPartFolder>Rental_SSRS/Report Parts</TargetReportPartFolder>
+    <TargetServerURL>http://localhost/reportserver</TargetServerURL>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <FullPath>Release</FullPath>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorLevel>2</ErrorLevel>
+    <OverwriteDatasets>True</OverwriteDatasets>
+    <OverwriteDataSources>False</OverwriteDataSources>
+    <TargetServerVersion>SSRS2016</TargetServerVersion>
+    <Platform>Win32</Platform>
+    <TargetReportFolder>Rental_SSRS/Звіти</TargetReportFolder>
+    <TargetDatasetFolder>Rental_SSRS/Datasets</TargetDatasetFolder>
+    <TargetDatasourceFolder>Rental_SSRS/Data Sources</TargetDatasourceFolder>
+    <TargetReportPartFolder>Rental_SSRS/Report Parts</TargetReportPartFolder>
+    <TargetServerURL>http://localhost/reportserver</TargetServerURL>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DataSources>@(DataSource)</DataSources>
+    <DataSets>@(DataSet)</DataSets>
+    <Reports>@(Report)</Reports>
+  </PropertyGroup>
+  <ItemGroup>
+    <DataSource Include="RentalCube.rds" />
+    <DataSource Include="RentalDW.rds" />
+  </ItemGroup>
+  <ItemGroup>
+    <DataSet Include="TenantTypes.rsd" />
+    <DataSet Include="TypeGroups.rsd" />
+    <DataSet Include="Years.rsd" />
+    <DataSet Include="YearsLast3.rsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Report Include="01 Орендарі та борги.rdl" />
+    <Report Include="02 Стан приміщень на дату.rdl" />
+    <Report Include="03 Довідка орендаря.rdl" />
+    <Report Include="03a Рахунки та платежі договору.rdl" />
+    <Report Include="04 Аналіз завантаженості.rdl" />
+    <Report Include="05 Фінансовий звіт по орендарях.rdl" />
+    <Report Include="06 Динаміка доходів і платежів.rdl" />
+    <Report Include="07 Панель керівника.rdl" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
+</Project>

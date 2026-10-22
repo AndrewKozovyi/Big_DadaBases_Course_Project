@@ -1,0 +1,1721 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:df="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition/defaultfontfamily" MustUnderstand="df">
+  <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
+  <Description>Діаграми: виставлено/сплачено по роках (Column), платежі та ковзне середнє (Line), структура доходу (Pie), топ-10 боржників (Bar). Джерело — OLAP-куб «Оренда».</Description>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="RentalCube">
+      <DataSourceReference>RentalCube</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>0f1e432d-4e43-45e0-8e46-5cb1fdde5b71</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="ByYear">
+      <Query>
+        <DataSourceName>RentalCube</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="TypeGroups">
+            <Value>=Parameters!TypeGroups.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="DateFrom">
+            <Value>=Code.DateMember(IIF(Code.BadRange(Parameters!DateFrom.Value, Parameters!DateTo.Value), Parameters!DateTo.Value, Parameters!DateFrom.Value))</Value>
+          </QueryParameter>
+          <QueryParameter Name="DateTo">
+            <Value>=Code.DateMember(Parameters!DateTo.Value)</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>WITH MEMBER [Measures].[YearKey] AS [Період].[Календар].CURRENTMEMBER.MEMBER_KEY
+SELECT {[Measures].[Сума рахунків], [Measures].[Сплачено], [Measures].[YearKey]} ON COLUMNS,
+       NonEmpty([Період].[Календар].[Рік].MEMBERS, [Measures].[Сума рахунків])
+       DIMENSION PROPERTIES MEMBER_CAPTION ON ROWS
+FROM (SELECT StrToSet(@TypeGroups, CONSTRAINED) ON COLUMNS
+      FROM (SELECT StrToMember(@DateFrom, CONSTRAINED) : StrToMember(@DateTo, CONSTRAINED) ON COLUMNS FROM [Оренда]))</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="Year">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Level" UniqueName="[Період].[Календар].[Рік]" /&gt;</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Invoiced">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Measure" UniqueName="[Measures].[Сума рахунків]" /&gt;</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Paid">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Measure" UniqueName="[Measures].[Сплачено]" /&gt;</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="YearKey">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Measure" UniqueName="[Measures].[YearKey]" /&gt;</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="ByMonth">
+      <Query>
+        <DataSourceName>RentalCube</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="TypeGroups">
+            <Value>=Parameters!TypeGroups.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="DateFrom">
+            <Value>=Code.DateMember(IIF(Code.BadRange(Parameters!DateFrom.Value, Parameters!DateTo.Value), Parameters!DateTo.Value, Parameters!DateFrom.Value))</Value>
+          </QueryParameter>
+          <QueryParameter Name="DateTo">
+            <Value>=Code.DateMember(Parameters!DateTo.Value)</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>WITH MEMBER [Measures].[MonthKey] AS [Період].[Календар].CURRENTMEMBER.MEMBER_KEY
+SELECT {[Measures].[Сума платежів], [Measures].[Платежі ковзне середнє 3], [Measures].[MonthKey]} ON COLUMNS,
+       NonEmpty([Період].[Календар].[Місяць].MEMBERS, [Measures].[Сума платежів])
+       DIMENSION PROPERTIES MEMBER_CAPTION ON ROWS
+FROM (SELECT StrToSet(@TypeGroups, CONSTRAINED) ON COLUMNS
+      FROM (SELECT StrToMember(@DateFrom, CONSTRAINED) : StrToMember(@DateTo, CONSTRAINED) ON COLUMNS FROM [Оренда]))</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="Month">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Level" UniqueName="[Період].[Календар].[Місяць]" /&gt;</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Payments">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Measure" UniqueName="[Measures].[Сума платежів]" /&gt;</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="MovingAvg">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Measure" UniqueName="[Measures].[Платежі ковзне середнє 3]" /&gt;</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="MonthKey">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Measure" UniqueName="[Measures].[MonthKey]" /&gt;</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="ByGroup">
+      <Query>
+        <DataSourceName>RentalCube</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="TypeGroups">
+            <Value>=Parameters!TypeGroups.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="DateFrom">
+            <Value>=Code.DateMember(IIF(Code.BadRange(Parameters!DateFrom.Value, Parameters!DateTo.Value), Parameters!DateTo.Value, Parameters!DateFrom.Value))</Value>
+          </QueryParameter>
+          <QueryParameter Name="DateTo">
+            <Value>=Code.DateMember(Parameters!DateTo.Value)</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>SELECT {[Measures].[Дохід від оренди]} ON COLUMNS,
+       NON EMPTY [Приміщення].[Група типів].[Група типів].MEMBERS
+       DIMENSION PROPERTIES MEMBER_CAPTION ON ROWS
+FROM (SELECT StrToSet(@TypeGroups, CONSTRAINED) ON COLUMNS
+      FROM (SELECT StrToMember(@DateFrom, CONSTRAINED) : StrToMember(@DateTo, CONSTRAINED) ON COLUMNS FROM [Оренда]))</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="TypeGroup">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Level" UniqueName="[Приміщення].[Група типів].[Група типів]" /&gt;</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Income">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Measure" UniqueName="[Measures].[Дохід від оренди]" /&gt;</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="Debtors">
+      <Query>
+        <DataSourceName>RentalCube</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="TypeGroups">
+            <Value>=Parameters!TypeGroups.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="DateFrom">
+            <Value>=Code.DateMember(IIF(Code.BadRange(Parameters!DateFrom.Value, Parameters!DateTo.Value), Parameters!DateTo.Value, Parameters!DateFrom.Value))</Value>
+          </QueryParameter>
+          <QueryParameter Name="DateTo">
+            <Value>=Code.DateMember(Parameters!DateTo.Value)</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>SELECT {[Measures].[Борг]} ON COLUMNS,
+       TopCount(NonEmpty([Орендар].[Орендар].[Орендар].MEMBERS, [Measures].[Борг]), 10, [Measures].[Борг])
+       DIMENSION PROPERTIES MEMBER_CAPTION ON ROWS
+FROM (SELECT StrToSet(@TypeGroups, CONSTRAINED) ON COLUMNS
+      FROM (SELECT StrToMember(@DateFrom, CONSTRAINED) : StrToMember(@DateTo, CONSTRAINED) ON COLUMNS FROM [Оренда]))</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="Tenant">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Level" UniqueName="[Орендар].[Орендар].[Орендар]" /&gt;</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Debt">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Measure" UniqueName="[Measures].[Борг]" /&gt;</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="TypeGroups">
+      <SharedDataSet>
+        <SharedDataSetReference>TypeGroups</SharedDataSetReference>
+      </SharedDataSet>
+      <Fields>
+        <Field Name="ParameterCaption">
+          <DataField>ParameterCaption</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ParameterValue">
+          <DataField>ParameterValue</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="Textbox">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Динаміка доходів і платежів</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>15pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>#1F4E79</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style/>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox</rd:DefaultName>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Top</VerticalAlign>
+              <PaddingLeft>0pt</PaddingLeft>
+              <PaddingRight>0pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
+            </Style>
+            <Top>0cm</Top>
+            <Left>0cm</Left>
+            <Height>0.85cm</Height>
+            <Width>27.3cm</Width>
+          </Textbox>
+          <Textbox Name="Textbox1">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>="Період: " &amp; Format(Parameters!DateFrom.Value, "dd.MM.yyyy") &amp; " – " &amp; Format(Parameters!DateTo.Value, "dd.MM.yyyy") &amp; "   •   Групи типів: " &amp; Join(Parameters!TypeGroups.Label, ", ")</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
+                      <FontStyle>Italic</FontStyle>
+                      <Color>#595959</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style/>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>0pt</PaddingLeft>
+              <PaddingRight>0pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
+            </Style>
+            <Top>0.85cm</Top>
+            <Left>0cm</Left>
+            <Height>0.5cm</Height>
+            <Width>27.3cm</Width>
+          </Textbox>
+          <Textbox Name="Textbox2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Дата початку періоду пізніша за дату завершення. Змініть параметри «Період з» / «Період по».</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>10pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>#C00000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style/>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Visibility>
+              <Hidden>=Not (Code.BadRange(Parameters!DateFrom.Value, Parameters!DateTo.Value))</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Color>#C00000</Color>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>#FCE4D6</BackgroundColor>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
+            </Style>
+            <Top>1.45cm</Top>
+            <Left>0cm</Left>
+            <Height>0.8cm</Height>
+            <Width>27.3cm</Width>
+          </Textbox>
+          <Chart Name="Chart">
+            <ChartCategoryHierarchy>
+              <ChartMembers>
+                <ChartMember>
+                  <Group Name="Chart_Cat">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!YearKey.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Fields!YearKey.Value</Value>
+                    </SortExpression>
+                  </SortExpressions>
+                  <Label>=Fields!Year.Value</Label>
+                </ChartMember>
+              </ChartMembers>
+            </ChartCategoryHierarchy>
+            <ChartSeriesHierarchy>
+              <ChartMembers>
+                <ChartMember>
+                  <Label>Виставлено</Label>
+                </ChartMember>
+                <ChartMember>
+                  <Label>Сплачено</Label>
+                </ChartMember>
+              </ChartMembers>
+            </ChartSeriesHierarchy>
+            <ChartData>
+              <ChartSeriesCollection>
+                <ChartSeries Name="Invoiced">
+                  <ChartDataPoints>
+                    <ChartDataPoint>
+                      <ChartDataPointValues>
+                        <Y>=Sum(Fields!Invoiced.Value) / 1000000</Y>
+                      </ChartDataPointValues>
+                      <ChartDataLabel>
+                        <Style>
+                          <FontFamily>Segoe UI</FontFamily>
+                          <FontSize>7pt</FontSize>
+                        </Style>
+                        <Label>#VALY{N1}</Label>
+                        <Visible>true</Visible>
+                      </ChartDataLabel>
+                      <ToolTip>=Fields!Year.Value &amp; ": виставлено " &amp; Format(Sum(Fields!Invoiced.Value), "#,##0") &amp; " грн"</ToolTip>
+                      <ActionInfo>
+                        <Actions>
+                          <Action>
+                            <Drillthrough>
+                              <ReportName>01 Орендарі та борги</ReportName>
+                              <Parameters>
+                                <Parameter Name="DateFrom">
+                                  <Value>=DateSerial(CInt(Fields!YearKey.Value), 1, 1)</Value>
+                                </Parameter>
+                                <Parameter Name="DateTo">
+                                  <Value>=DateSerial(CInt(Fields!YearKey.Value), 12, 31)</Value>
+                                </Parameter>
+                                <Parameter Name="OnlyDebtors">
+                                  <Value>true</Value>
+                                </Parameter>
+                              </Parameters>
+                            </Drillthrough>
+                          </Action>
+                        </Actions>
+                      </ActionInfo>
+                      <Style/>
+                      <ChartMarker>
+                        <Style/>
+                      </ChartMarker>
+                      <DataElementOutput>Output</DataElementOutput>
+                    </ChartDataPoint>
+                  </ChartDataPoints>
+                  <Type>Column</Type>
+                  <Style/>
+                  <ChartEmptyPoints>
+                    <Style/>
+                    <ChartMarker>
+                      <Style/>
+                    </ChartMarker>
+                    <ChartDataLabel>
+                      <Style/>
+                    </ChartDataLabel>
+                  </ChartEmptyPoints>
+                  <ValueAxisName>Primary</ValueAxisName>
+                  <CategoryAxisName>Primary</CategoryAxisName>
+                  <ChartSmartLabel>
+                    <CalloutLineColor>Black</CalloutLineColor>
+                    <MinMovingDistance>0pt</MinMovingDistance>
+                  </ChartSmartLabel>
+                </ChartSeries>
+                <ChartSeries Name="Paid">
+                  <ChartDataPoints>
+                    <ChartDataPoint>
+                      <ChartDataPointValues>
+                        <Y>=Sum(Fields!Paid.Value) / 1000000</Y>
+                      </ChartDataPointValues>
+                      <ChartDataLabel>
+                        <Style>
+                          <FontFamily>Segoe UI</FontFamily>
+                          <FontSize>7pt</FontSize>
+                        </Style>
+                      </ChartDataLabel>
+                      <ToolTip>=Fields!Year.Value &amp; ": сплачено " &amp; Format(Sum(Fields!Paid.Value), "#,##0") &amp; " грн"</ToolTip>
+                      <Style/>
+                      <ChartMarker>
+                        <Style/>
+                      </ChartMarker>
+                      <DataElementOutput>Output</DataElementOutput>
+                    </ChartDataPoint>
+                  </ChartDataPoints>
+                  <Type>Column</Type>
+                  <Style/>
+                  <ChartEmptyPoints>
+                    <Style/>
+                    <ChartMarker>
+                      <Style/>
+                    </ChartMarker>
+                    <ChartDataLabel>
+                      <Style/>
+                    </ChartDataLabel>
+                  </ChartEmptyPoints>
+                  <ValueAxisName>Primary</ValueAxisName>
+                  <CategoryAxisName>Primary</CategoryAxisName>
+                  <ChartSmartLabel>
+                    <CalloutLineColor>Black</CalloutLineColor>
+                    <MinMovingDistance>0pt</MinMovingDistance>
+                  </ChartSmartLabel>
+                </ChartSeries>
+              </ChartSeriesCollection>
+            </ChartData>
+            <ChartAreas>
+              <ChartArea Name="Default">
+                <ChartCategoryAxes>
+                  <ChartAxis Name="Primary">
+                    <Visible>True</Visible>
+                    <Style>
+                      <Border>
+                        <Color>#BFBFBF</Color>
+                        <Style>Solid</Style>
+                      </Border>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption/>
+                      <Style>
+                        <FontFamily>Segoe UI</FontFamily>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Enabled>False</Enabled>
+                      <Style>
+                        <Border>
+                          <Color>#E7E6E6</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMajorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>#BFBFBF</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorTickMarks>
+                    <ChartMinorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>#BFBFBF</Color>
+                        </Border>
+                      </Style>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style/>
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                </ChartCategoryAxes>
+                <ChartValueAxes>
+                  <ChartAxis Name="Primary">
+                    <Visible>True</Visible>
+                    <Style>
+                      <Border>
+                        <Color>#BFBFBF</Color>
+                        <Style>Solid</Style>
+                      </Border>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
+                      <Format>#,##0.0</Format>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption>млн грн</Caption>
+                      <Style>
+                        <FontFamily>Segoe UI</FontFamily>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Enabled>True</Enabled>
+                      <Style>
+                        <Border>
+                          <Color>#E7E6E6</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMajorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>#BFBFBF</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorTickMarks>
+                    <ChartMinorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>#BFBFBF</Color>
+                        </Border>
+                      </Style>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style/>
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                </ChartValueAxes>
+                <Style>
+                  <BackgroundColor>White</BackgroundColor>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                </Style>
+              </ChartArea>
+            </ChartAreas>
+            <ChartLegends>
+              <ChartLegend Name="Default">
+                <Style>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                  <FontFamily>Segoe UI</FontFamily>
+                  <FontSize>7pt</FontSize>
+                </Style>
+                <Position>BottomCenter</Position>
+                <DockOutsideChartArea>true</DockOutsideChartArea>
+                <ChartLegendTitle>
+                  <Caption/>
+                  <Style>
+                    <FontFamily>Segoe UI</FontFamily>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </ChartLegendTitle>
+                <HeaderSeparatorColor>Black</HeaderSeparatorColor>
+                <ColumnSeparatorColor>Black</ColumnSeparatorColor>
+              </ChartLegend>
+            </ChartLegends>
+            <ChartTitles>
+              <ChartTitle Name="Default">
+                <Caption>Виставлено та сплачено по роках, млн грн (стовпчикова)</Caption>
+                <Style>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                  <FontFamily>Segoe UI</FontFamily>
+                  <FontSize>10pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <Color>#1F4E79</Color>
+                  <TextAlign>General</TextAlign>
+                  <VerticalAlign>Top</VerticalAlign>
+                </Style>
+              </ChartTitle>
+            </ChartTitles>
+            <Palette>Custom</Palette>
+            <ChartCustomPaletteColors>
+              <ChartCustomPaletteColor>#1F4E79</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#ED7D31</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#70AD47</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#FFC000</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#5B9BD5</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#A5A5A5</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#264478</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#9E480E</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#43682B</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#997300</ChartCustomPaletteColor>
+            </ChartCustomPaletteColors>
+            <ChartBorderSkin>
+              <Style>
+                <BackgroundColor>Gray</BackgroundColor>
+                <BackgroundGradientType>None</BackgroundGradientType>
+                <Color>White</Color>
+              </Style>
+            </ChartBorderSkin>
+            <ChartNoDataMessage Name="NoDataMessage">
+              <Caption>Немає даних</Caption>
+              <Style>
+                <BackgroundGradientType>None</BackgroundGradientType>
+                <FontFamily>Segoe UI</FontFamily>
+                <FontSize>8pt</FontSize>
+                <TextAlign>General</TextAlign>
+                <VerticalAlign>Top</VerticalAlign>
+              </Style>
+            </ChartNoDataMessage>
+            <Visibility>
+              <Hidden>=Code.BadRange(Parameters!DateFrom.Value, Parameters!DateTo.Value)</Hidden>
+            </Visibility>
+            <DataSetName>ByYear</DataSetName>
+            <Top>1.5cm</Top>
+            <Left>0cm</Left>
+            <Height>7.9cm</Height>
+            <Width>13.5cm</Width>
+            <Style>
+              <Border>
+                <Color>#BFBFBF</Color>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>White</BackgroundColor>
+              <BackgroundGradientType>None</BackgroundGradientType>
+            </Style>
+          </Chart>
+          <Chart Name="Chart1">
+            <ChartCategoryHierarchy>
+              <ChartMembers>
+                <ChartMember>
+                  <Group Name="Chart1_Cat">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!MonthKey.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Fields!MonthKey.Value</Value>
+                    </SortExpression>
+                  </SortExpressions>
+                  <Label>=Fields!Month.Value</Label>
+                </ChartMember>
+              </ChartMembers>
+            </ChartCategoryHierarchy>
+            <ChartSeriesHierarchy>
+              <ChartMembers>
+                <ChartMember>
+                  <Label>Платежі за місяць</Label>
+                </ChartMember>
+                <ChartMember>
+                  <Label>Ковзне середнє (3 міс.)</Label>
+                </ChartMember>
+              </ChartMembers>
+            </ChartSeriesHierarchy>
+            <ChartData>
+              <ChartSeriesCollection>
+                <ChartSeries Name="Payments">
+                  <ChartDataPoints>
+                    <ChartDataPoint>
+                      <ChartDataPointValues>
+                        <Y>=Sum(Fields!Payments.Value) / 1000000</Y>
+                      </ChartDataPointValues>
+                      <ChartDataLabel>
+                        <Style>
+                          <FontFamily>Segoe UI</FontFamily>
+                          <FontSize>7pt</FontSize>
+                        </Style>
+                      </ChartDataLabel>
+                      <ToolTip>=Fields!Month.Value &amp; ": " &amp; Format(Sum(Fields!Payments.Value), "#,##0") &amp; " грн"</ToolTip>
+                      <Style>
+                        <Border>
+                          <Width>1.5pt</Width>
+                        </Border>
+                      </Style>
+                      <ChartMarker>
+                        <Type>Circle</Type>
+                        <Size>5pt</Size>
+                      </ChartMarker>
+                      <DataElementOutput>Output</DataElementOutput>
+                    </ChartDataPoint>
+                  </ChartDataPoints>
+                  <Type>Line</Type>
+                  <Style/>
+                  <ChartEmptyPoints>
+                    <Style/>
+                    <ChartMarker>
+                      <Style/>
+                    </ChartMarker>
+                    <ChartDataLabel>
+                      <Style/>
+                    </ChartDataLabel>
+                  </ChartEmptyPoints>
+                  <ValueAxisName>Primary</ValueAxisName>
+                  <CategoryAxisName>Primary</CategoryAxisName>
+                  <ChartSmartLabel>
+                    <CalloutLineColor>Black</CalloutLineColor>
+                    <MinMovingDistance>0pt</MinMovingDistance>
+                  </ChartSmartLabel>
+                </ChartSeries>
+                <ChartSeries Name="MovingAvg">
+                  <ChartDataPoints>
+                    <ChartDataPoint>
+                      <ChartDataPointValues>
+                        <Y>=Sum(Fields!MovingAvg.Value) / 1000000</Y>
+                      </ChartDataPointValues>
+                      <ChartDataLabel>
+                        <Style>
+                          <FontFamily>Segoe UI</FontFamily>
+                          <FontSize>7pt</FontSize>
+                        </Style>
+                      </ChartDataLabel>
+                      <Style>
+                        <Border>
+                          <Width>2.5pt</Width>
+                          <Style>Dashed</Style>
+                        </Border>
+                      </Style>
+                      <ChartMarker>
+                        <Style/>
+                      </ChartMarker>
+                      <DataElementOutput>Output</DataElementOutput>
+                    </ChartDataPoint>
+                  </ChartDataPoints>
+                  <Type>Line</Type>
+                  <Style/>
+                  <ChartEmptyPoints>
+                    <Style/>
+                    <ChartMarker>
+                      <Style/>
+                    </ChartMarker>
+                    <ChartDataLabel>
+                      <Style/>
+                    </ChartDataLabel>
+                  </ChartEmptyPoints>
+                  <ValueAxisName>Primary</ValueAxisName>
+                  <CategoryAxisName>Primary</CategoryAxisName>
+                  <ChartSmartLabel>
+                    <CalloutLineColor>Black</CalloutLineColor>
+                    <MinMovingDistance>0pt</MinMovingDistance>
+                  </ChartSmartLabel>
+                </ChartSeries>
+              </ChartSeriesCollection>
+            </ChartData>
+            <ChartAreas>
+              <ChartArea Name="Default">
+                <ChartCategoryAxes>
+                  <ChartAxis Name="Primary">
+                    <Visible>True</Visible>
+                    <Style>
+                      <Border>
+                        <Color>#BFBFBF</Color>
+                        <Style>Solid</Style>
+                      </Border>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption/>
+                      <Style>
+                        <FontFamily>Segoe UI</FontFamily>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Enabled>False</Enabled>
+                      <Style>
+                        <Border>
+                          <Color>#E7E6E6</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMajorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>#BFBFBF</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorTickMarks>
+                    <ChartMinorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>#BFBFBF</Color>
+                        </Border>
+                      </Style>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <Angle>-45</Angle>
+                    <LabelsAutoFitDisabled>true</LabelsAutoFitDisabled>
+                    <CrossAt>NaN</CrossAt>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style/>
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                </ChartCategoryAxes>
+                <ChartValueAxes>
+                  <ChartAxis Name="Primary">
+                    <Visible>True</Visible>
+                    <Style>
+                      <Border>
+                        <Color>#BFBFBF</Color>
+                        <Style>Solid</Style>
+                      </Border>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
+                      <Format>#,##0.0</Format>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption>млн грн</Caption>
+                      <Style>
+                        <FontFamily>Segoe UI</FontFamily>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Enabled>True</Enabled>
+                      <Style>
+                        <Border>
+                          <Color>#E7E6E6</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMajorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>#BFBFBF</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorTickMarks>
+                    <ChartMinorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>#BFBFBF</Color>
+                        </Border>
+                      </Style>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <IncludeZero>false</IncludeZero>
+                    <CrossAt>NaN</CrossAt>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style/>
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                </ChartValueAxes>
+                <Style>
+                  <BackgroundColor>White</BackgroundColor>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                </Style>
+              </ChartArea>
+            </ChartAreas>
+            <ChartLegends>
+              <ChartLegend Name="Default">
+                <Style>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                  <FontFamily>Segoe UI</FontFamily>
+                  <FontSize>7pt</FontSize>
+                </Style>
+                <Position>BottomCenter</Position>
+                <DockOutsideChartArea>true</DockOutsideChartArea>
+                <ChartLegendTitle>
+                  <Caption/>
+                  <Style>
+                    <FontFamily>Segoe UI</FontFamily>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </ChartLegendTitle>
+                <HeaderSeparatorColor>Black</HeaderSeparatorColor>
+                <ColumnSeparatorColor>Black</ColumnSeparatorColor>
+              </ChartLegend>
+            </ChartLegends>
+            <ChartTitles>
+              <ChartTitle Name="Default">
+                <Caption>Платежі по місяцях і ковзне середнє, млн грн (лінійна)</Caption>
+                <Style>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                  <FontFamily>Segoe UI</FontFamily>
+                  <FontSize>10pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <Color>#1F4E79</Color>
+                  <TextAlign>General</TextAlign>
+                  <VerticalAlign>Top</VerticalAlign>
+                </Style>
+              </ChartTitle>
+            </ChartTitles>
+            <Palette>Custom</Palette>
+            <ChartCustomPaletteColors>
+              <ChartCustomPaletteColor>#1F4E79</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#ED7D31</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#70AD47</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#FFC000</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#5B9BD5</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#A5A5A5</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#264478</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#9E480E</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#43682B</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#997300</ChartCustomPaletteColor>
+            </ChartCustomPaletteColors>
+            <ChartBorderSkin>
+              <Style>
+                <BackgroundColor>Gray</BackgroundColor>
+                <BackgroundGradientType>None</BackgroundGradientType>
+                <Color>White</Color>
+              </Style>
+            </ChartBorderSkin>
+            <ChartNoDataMessage Name="NoDataMessage">
+              <Caption>Немає даних</Caption>
+              <Style>
+                <BackgroundGradientType>None</BackgroundGradientType>
+                <FontFamily>Segoe UI</FontFamily>
+                <FontSize>8pt</FontSize>
+                <TextAlign>General</TextAlign>
+                <VerticalAlign>Top</VerticalAlign>
+              </Style>
+            </ChartNoDataMessage>
+            <Visibility>
+              <Hidden>=Code.BadRange(Parameters!DateFrom.Value, Parameters!DateTo.Value)</Hidden>
+            </Visibility>
+            <DataSetName>ByMonth</DataSetName>
+            <Top>1.5cm</Top>
+            <Left>13.8cm</Left>
+            <Height>7.9cm</Height>
+            <Width>13.5cm</Width>
+            <Style>
+              <Border>
+                <Color>#BFBFBF</Color>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>White</BackgroundColor>
+              <BackgroundGradientType>None</BackgroundGradientType>
+            </Style>
+          </Chart>
+          <Chart Name="Chart2">
+            <ChartCategoryHierarchy>
+              <ChartMembers>
+                <ChartMember>
+                  <Group Name="Chart2_Cat">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!TypeGroup.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Sum(Fields!Income.Value)</Value>
+                      <Direction>Descending</Direction>
+                    </SortExpression>
+                  </SortExpressions>
+                  <Label>=Fields!TypeGroup.Value</Label>
+                </ChartMember>
+              </ChartMembers>
+            </ChartCategoryHierarchy>
+            <ChartSeriesHierarchy>
+              <ChartMembers>
+                <ChartMember>
+                  <Label>Дохід</Label>
+                </ChartMember>
+              </ChartMembers>
+            </ChartSeriesHierarchy>
+            <ChartData>
+              <ChartSeriesCollection>
+                <ChartSeries Name="Income">
+                  <ChartDataPoints>
+                    <ChartDataPoint>
+                      <ChartDataPointValues>
+                        <Y>=Sum(Fields!Income.Value)</Y>
+                      </ChartDataPointValues>
+                      <ChartDataLabel>
+                        <Style>
+                          <FontFamily>Segoe UI</FontFamily>
+                          <FontSize>7pt</FontSize>
+                        </Style>
+                        <Label>#PERCENT{P1}</Label>
+                        <Visible>true</Visible>
+                      </ChartDataLabel>
+                      <ToolTip>=Fields!TypeGroup.Value &amp; ": " &amp; Format(Sum(Fields!Income.Value), "#,##0") &amp; " грн"</ToolTip>
+                      <Style/>
+                      <ChartMarker>
+                        <Style/>
+                      </ChartMarker>
+                      <DataElementOutput>Output</DataElementOutput>
+                    </ChartDataPoint>
+                  </ChartDataPoints>
+                  <Type>Shape</Type>
+                  <Subtype>Pie</Subtype>
+                  <Style/>
+                  <ChartEmptyPoints>
+                    <Style/>
+                    <ChartMarker>
+                      <Style/>
+                    </ChartMarker>
+                    <ChartDataLabel>
+                      <Style/>
+                    </ChartDataLabel>
+                  </ChartEmptyPoints>
+                  <ValueAxisName>Primary</ValueAxisName>
+                  <CategoryAxisName>Primary</CategoryAxisName>
+                  <ChartSmartLabel>
+                    <CalloutLineColor>Black</CalloutLineColor>
+                    <MinMovingDistance>0pt</MinMovingDistance>
+                  </ChartSmartLabel>
+                </ChartSeries>
+              </ChartSeriesCollection>
+            </ChartData>
+            <ChartAreas>
+              <ChartArea Name="Default">
+                <ChartCategoryAxes>
+                  <ChartAxis Name="Primary">
+                    <Visible>True</Visible>
+                    <Style>
+                      <Border>
+                        <Color>#BFBFBF</Color>
+                        <Style>Solid</Style>
+                      </Border>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption/>
+                      <Style>
+                        <FontFamily>Segoe UI</FontFamily>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Enabled>False</Enabled>
+                      <Style>
+                        <Border>
+                          <Color>#E7E6E6</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMajorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>#BFBFBF</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorTickMarks>
+                    <ChartMinorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>#BFBFBF</Color>
+                        </Border>
+                      </Style>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style/>
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                </ChartCategoryAxes>
+                <ChartValueAxes>
+                  <ChartAxis Name="Primary">
+                    <Visible>True</Visible>
+                    <Style>
+                      <Border>
+                        <Color>#BFBFBF</Color>
+                        <Style>Solid</Style>
+                      </Border>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption/>
+                      <Style>
+                        <FontFamily>Segoe UI</FontFamily>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Enabled>True</Enabled>
+                      <Style>
+                        <Border>
+                          <Color>#E7E6E6</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMajorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>#BFBFBF</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorTickMarks>
+                    <ChartMinorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>#BFBFBF</Color>
+                        </Border>
+                      </Style>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style/>
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                </ChartValueAxes>
+                <Style>
+                  <BackgroundColor>White</BackgroundColor>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                </Style>
+              </ChartArea>
+            </ChartAreas>
+            <ChartLegends>
+              <ChartLegend Name="Default">
+                <Style>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                  <FontFamily>Segoe UI</FontFamily>
+                  <FontSize>7pt</FontSize>
+                </Style>
+                <Position>RightCenter</Position>
+                <DockOutsideChartArea>true</DockOutsideChartArea>
+                <ChartLegendTitle>
+                  <Caption/>
+                  <Style>
+                    <FontFamily>Segoe UI</FontFamily>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </ChartLegendTitle>
+                <HeaderSeparatorColor>Black</HeaderSeparatorColor>
+                <ColumnSeparatorColor>Black</ColumnSeparatorColor>
+              </ChartLegend>
+            </ChartLegends>
+            <ChartTitles>
+              <ChartTitle Name="Default">
+                <Caption>Структура доходу від оренди за групами типів (кругова)</Caption>
+                <Style>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                  <FontFamily>Segoe UI</FontFamily>
+                  <FontSize>10pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <Color>#1F4E79</Color>
+                  <TextAlign>General</TextAlign>
+                  <VerticalAlign>Top</VerticalAlign>
+                </Style>
+              </ChartTitle>
+            </ChartTitles>
+            <Palette>Custom</Palette>
+            <ChartCustomPaletteColors>
+              <ChartCustomPaletteColor>#1F4E79</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#ED7D31</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#70AD47</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#FFC000</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#5B9BD5</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#A5A5A5</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#264478</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#9E480E</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#43682B</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#997300</ChartCustomPaletteColor>
+            </ChartCustomPaletteColors>
+            <ChartBorderSkin>
+              <Style>
+                <BackgroundColor>Gray</BackgroundColor>
+                <BackgroundGradientType>None</BackgroundGradientType>
+                <Color>White</Color>
+              </Style>
+            </ChartBorderSkin>
+            <ChartNoDataMessage Name="NoDataMessage">
+              <Caption>Немає даних</Caption>
+              <Style>
+                <BackgroundGradientType>None</BackgroundGradientType>
+                <FontFamily>Segoe UI</FontFamily>
+                <FontSize>8pt</FontSize>
+                <TextAlign>General</TextAlign>
+                <VerticalAlign>Top</VerticalAlign>
+              </Style>
+            </ChartNoDataMessage>
+            <Visibility>
+              <Hidden>=Code.BadRange(Parameters!DateFrom.Value, Parameters!DateTo.Value)</Hidden>
+            </Visibility>
+            <DataSetName>ByGroup</DataSetName>
+            <Top>9.7cm</Top>
+            <Left>0cm</Left>
+            <Height>7.9cm</Height>
+            <Width>13.5cm</Width>
+            <Style>
+              <Border>
+                <Color>#BFBFBF</Color>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>White</BackgroundColor>
+              <BackgroundGradientType>None</BackgroundGradientType>
+            </Style>
+          </Chart>
+          <Chart Name="Chart3">
+            <ChartCategoryHierarchy>
+              <ChartMembers>
+                <ChartMember>
+                  <Group Name="Chart3_Cat">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!Tenant.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Sum(Fields!Debt.Value)</Value>
+                    </SortExpression>
+                  </SortExpressions>
+                  <Label>=Fields!Tenant.Value</Label>
+                </ChartMember>
+              </ChartMembers>
+            </ChartCategoryHierarchy>
+            <ChartSeriesHierarchy>
+              <ChartMembers>
+                <ChartMember>
+                  <Label>Борг</Label>
+                </ChartMember>
+              </ChartMembers>
+            </ChartSeriesHierarchy>
+            <ChartData>
+              <ChartSeriesCollection>
+                <ChartSeries Name="Debt">
+                  <ChartDataPoints>
+                    <ChartDataPoint>
+                      <ChartDataPointValues>
+                        <Y>=Sum(Fields!Debt.Value) / 1000</Y>
+                      </ChartDataPointValues>
+                      <ChartDataLabel>
+                        <Style>
+                          <FontFamily>Segoe UI</FontFamily>
+                          <FontSize>7pt</FontSize>
+                        </Style>
+                        <Label>#VALY{N0}</Label>
+                        <Visible>true</Visible>
+                      </ChartDataLabel>
+                      <ToolTip>=Fields!Tenant.Value &amp; ": борг " &amp; Format(Sum(Fields!Debt.Value), "#,##0.00") &amp; " грн"</ToolTip>
+                      <Style>
+                        <Color>#C00000</Color>
+                      </Style>
+                      <ChartMarker>
+                        <Style/>
+                      </ChartMarker>
+                      <DataElementOutput>Output</DataElementOutput>
+                    </ChartDataPoint>
+                  </ChartDataPoints>
+                  <Type>Bar</Type>
+                  <Style/>
+                  <ChartEmptyPoints>
+                    <Style/>
+                    <ChartMarker>
+                      <Style/>
+                    </ChartMarker>
+                    <ChartDataLabel>
+                      <Style/>
+                    </ChartDataLabel>
+                  </ChartEmptyPoints>
+                  <ValueAxisName>Primary</ValueAxisName>
+                  <CategoryAxisName>Primary</CategoryAxisName>
+                  <ChartSmartLabel>
+                    <CalloutLineColor>Black</CalloutLineColor>
+                    <MinMovingDistance>0pt</MinMovingDistance>
+                  </ChartSmartLabel>
+                </ChartSeries>
+              </ChartSeriesCollection>
+            </ChartData>
+            <ChartAreas>
+              <ChartArea Name="Default">
+                <ChartCategoryAxes>
+                  <ChartAxis Name="Primary">
+                    <Visible>True</Visible>
+                    <Style>
+                      <Border>
+                        <Color>#BFBFBF</Color>
+                        <Style>Solid</Style>
+                      </Border>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption/>
+                      <Style>
+                        <FontFamily>Segoe UI</FontFamily>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Enabled>False</Enabled>
+                      <Style>
+                        <Border>
+                          <Color>#E7E6E6</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMajorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>#BFBFBF</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorTickMarks>
+                    <ChartMinorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>#BFBFBF</Color>
+                        </Border>
+                      </Style>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <Interval>1</Interval>
+                    <CrossAt>NaN</CrossAt>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style/>
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                </ChartCategoryAxes>
+                <ChartValueAxes>
+                  <ChartAxis Name="Primary">
+                    <Visible>True</Visible>
+                    <Style>
+                      <Border>
+                        <Color>#BFBFBF</Color>
+                        <Style>Solid</Style>
+                      </Border>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
+                      <Format>#,##0</Format>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption>тис. грн</Caption>
+                      <Style>
+                        <FontFamily>Segoe UI</FontFamily>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Enabled>True</Enabled>
+                      <Style>
+                        <Border>
+                          <Color>#E7E6E6</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMajorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>#BFBFBF</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorTickMarks>
+                    <ChartMinorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>#BFBFBF</Color>
+                        </Border>
+                      </Style>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style/>
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                </ChartValueAxes>
+                <Style>
+                  <BackgroundColor>White</BackgroundColor>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                </Style>
+              </ChartArea>
+            </ChartAreas>
+            <ChartLegends>
+              <ChartLegend Name="Default">
+                <Hidden>true</Hidden>
+                <Style/>
+                <ChartLegendTitle>
+                  <Caption/>
+                  <Style/>
+                </ChartLegendTitle>
+              </ChartLegend>
+            </ChartLegends>
+            <ChartTitles>
+              <ChartTitle Name="Default">
+                <Caption>Топ-10 боржників, тис. грн (горизонтальна)</Caption>
+                <Style>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                  <FontFamily>Segoe UI</FontFamily>
+                  <FontSize>10pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <Color>#1F4E79</Color>
+                  <TextAlign>General</TextAlign>
+                  <VerticalAlign>Top</VerticalAlign>
+                </Style>
+              </ChartTitle>
+            </ChartTitles>
+            <Palette>Custom</Palette>
+            <ChartCustomPaletteColors>
+              <ChartCustomPaletteColor>#1F4E79</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#ED7D31</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#70AD47</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#FFC000</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#5B9BD5</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#A5A5A5</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#264478</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#9E480E</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#43682B</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#997300</ChartCustomPaletteColor>
+            </ChartCustomPaletteColors>
+            <ChartBorderSkin>
+              <Style>
+                <BackgroundColor>Gray</BackgroundColor>
+                <BackgroundGradientType>None</BackgroundGradientType>
+                <Color>White</Color>
+              </Style>
+            </ChartBorderSkin>
+            <ChartNoDataMessage Name="NoDataMessage">
+              <Caption>Немає даних</Caption>
+              <Style>
+                <BackgroundGradientType>None</BackgroundGradientType>
+                <FontFamily>Segoe UI</FontFamily>
+                <FontSize>8pt</FontSize>
+                <TextAlign>General</TextAlign>
+                <VerticalAlign>Top</VerticalAlign>
+              </Style>
+            </ChartNoDataMessage>
+            <Visibility>
+              <Hidden>=Code.BadRange(Parameters!DateFrom.Value, Parameters!DateTo.Value)</Hidden>
+            </Visibility>
+            <DataSetName>Debtors</DataSetName>
+            <Top>9.7cm</Top>
+            <Left>13.8cm</Left>
+            <Height>7.9cm</Height>
+            <Width>13.5cm</Width>
+            <Style>
+              <Border>
+                <Color>#BFBFBF</Color>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>White</BackgroundColor>
+              <BackgroundGradientType>None</BackgroundGradientType>
+            </Style>
+          </Chart>
+        </ReportItems>
+        <Height>17.8cm</Height>
+        <Style/>
+      </Body>
+      <Width>27.3cm</Width>
+      <Page>
+        <PageFooter>
+          <Height>0.8cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="Textbox3">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Globals!ReportName &amp; "  •  сформовано " &amp; Format(Globals!ExecutionTime, "dd.MM.yyyy HH:mm")</Value>
+                      <Style>
+                        <FontFamily>Segoe UI</FontFamily>
+                        <FontSize>7pt</FontSize>
+                        <Color>#7F7F7F</Color>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style/>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox3</rd:DefaultName>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <VerticalAlign>Middle</VerticalAlign>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>1pt</PaddingTop>
+                <PaddingBottom>1pt</PaddingBottom>
+              </Style>
+              <Top>0.1cm</Top>
+              <Left>0cm</Left>
+              <Height>0.5cm</Height>
+              <Width>17.745cm</Width>
+            </Textbox>
+            <Textbox Name="Textbox4">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>="Сторінка " &amp; Globals!PageNumber &amp; " з " &amp; Globals!TotalPages</Value>
+                      <Style>
+                        <FontFamily>Segoe UI</FontFamily>
+                        <FontSize>7pt</FontSize>
+                        <Color>#7F7F7F</Color>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox4</rd:DefaultName>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <VerticalAlign>Middle</VerticalAlign>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>1pt</PaddingTop>
+                <PaddingBottom>1pt</PaddingBottom>
+              </Style>
+              <Top>0.1cm</Top>
+              <Left>17.745cm</Left>
+              <Height>0.5cm</Height>
+              <Width>9.555cm</Width>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageFooter>
+        <PageHeight>21.0cm</PageHeight>
+        <PageWidth>29.7cm</PageWidth>
+        <LeftMargin>1.2cm</LeftMargin>
+        <RightMargin>1.2cm</RightMargin>
+        <TopMargin>1.2cm</TopMargin>
+        <BottomMargin>1.2cm</BottomMargin>
+        <ColumnSpacing>0.13cm</ColumnSpacing>
+        <Style/>
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="DateFrom">
+      <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=DateSerial(Year(Today()) - 3, 1, 1)</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Період з</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="DateTo">
+      <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=Today()</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Період по</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="TypeGroups">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>TypeGroups</DataSetName>
+          <ValueField>ParameterValue</ValueField>
+        </DataSetReference>
+      </DefaultValue>
+      <Prompt>Групи типів приміщень</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>TypeGroups</DataSetName>
+          <ValueField>ParameterValue</ValueField>
+          <LabelField>ParameterCaption</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
+    </ReportParameter>
+  </ReportParameters>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>3</NumberOfColumns>
+      <NumberOfRows>1</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>DateFrom</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>DateTo</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>TypeGroups</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <Code>
+' Член виміру «Період» для MDX: [Період].[Дата].&amp;[yyyyMMdd].
+' Дата обмежується діапазоном виміру «Дата» (2021-01-01 ... 2027-12-31), щоб StrToMember(CONSTRAINED) не падав.
+Public Function DateMember(ByVal d As Date) As String
+    Dim minD As New Date(2021, 1, 1)
+    Dim maxD As New Date(2027, 12, 31)
+    If d &lt; minD Then d = minD
+    If d &gt; maxD Then d = maxD
+    Return "[Період].[Дата].&amp;[" &amp; d.ToString("yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture) &amp; "]"
+End Function
+
+' Валідація діапазону дат: True, якщо дата початку пізніша за дату завершення
+Public Function BadRange(ByVal f As Date, ByVal t As Date) As Boolean
+    Return f &gt; t
+End Function
+
+' Частка a / b; Nothing, якщо знаменник порожній або нуль
+Public Function Ratio(ByVal a As Object, ByVal b As Object) As Object
+    If b Is Nothing OrElse IsDBNull(b) Then Return Nothing
+    If CDbl(b) = 0 Then Return Nothing
+    If a Is Nothing OrElse IsDBNull(a) Then Return 0
+    Return CDbl(a) / CDbl(b)
+End Function
+
+' Сума елементів масиву (результат LookupSet)
+Public Function SumArr(ByVal items As Object()) As Decimal
+    Dim s As Decimal = 0
+    If items Is Nothing Then Return 0
+    For Each it As Object In items
+        If Not (it Is Nothing OrElse IsDBNull(it)) Then s += CDec(it)
+    Next
+    Return s
+End Function
+
+' Колір теплової карти для частки 0..1: червоний (&lt;= lo) -&gt; жовтий -&gt; зелений (&gt;= hi)
+Public Function Heat(ByVal v As Object, ByVal lo As Double, ByVal hi As Double) As String
+    If v Is Nothing OrElse IsDBNull(v) Then Return "White"
+    Dim x As Double = (CDbl(v) - lo) / (hi - lo)
+    If x &lt; 0 Then x = 0
+    If x &gt; 1 Then x = 1
+    Dim r, g, b As Integer
+    If x &lt; 0.5 Then
+        Dim k As Double = x / 0.5
+        r = 248 + CInt((255 - 248) * k) : g = 105 + CInt((235 - 105) * k) : b = 107 + CInt((132 - 107) * k)
+    Else
+        Dim k As Double = (x - 0.5) / 0.5
+        r = 255 + CInt((99 - 255) * k) : g = 235 + CInt((190 - 235) * k) : b = 132 + CInt((123 - 132) * k)
+    End If
+    Return "#" &amp; r.ToString("X2") &amp; g.ToString("X2") &amp; b.ToString("X2")
+End Function
+
+' Колір за порогами KPI: &gt;= goal — зелений, &gt;= warn — жовтий, інакше червоний
+Public Function KpiColor(ByVal v As Object, ByVal goal As Double, ByVal warn As Double) As String
+    If v Is Nothing OrElse IsDBNull(v) Then Return "White"
+    If CDbl(v) &gt;= goal Then Return "#E2EFDA"
+    If CDbl(v) &gt;= warn Then Return "#FFF2CC"
+    Return "#FCE4D6"
+End Function
+</Code>
+  <Language>uk-UA</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>871e7008-eb77-4aec-a9d7-cdde9b5383a0</rd:ReportID>
+</Report>
