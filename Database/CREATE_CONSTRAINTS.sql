@@ -67,7 +67,8 @@ GO
 
 -- Приміщення
 ALTER TABLE dbo.Premises
-    ADD CONSTRAINT CK_Premises_RoomsCount   CHECK (RoomsCount > 0),
+    ADD CONSTRAINT CK_Premises_Floor        CHECK (Floor IS NULL OR Floor BETWEEN -5 AND 100),
+        CONSTRAINT CK_Premises_RoomsCount   CHECK (RoomsCount > 0),
         CONSTRAINT CK_Premises_Area         CHECK (Area > 0),
         CONSTRAINT CK_Premises_MonthlyPrice CHECK (MonthlyPrice > 0);
 

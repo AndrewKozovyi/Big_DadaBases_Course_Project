@@ -48,6 +48,7 @@ RETURN
         p.Address,
         pt.TypeID,
         pt.Name                                   AS PremisesType,
+        p.Floor,
         p.RoomsCount,
         p.Area,
         p.MonthlyPrice,
@@ -165,6 +166,7 @@ GO
 /* Виставлення рахунків за місяць усім договорам, що діяли в цьому місяці
    хоча б один день. Неповний місяць оплачується пропорційно дням оренди.
    Комунальні = площа × тариф за м² (пропорційно дням).
+   Термін оплати — PaymentDay місяця, але не раніше дати початку оренди.
    Повторний запуск за той самий місяць дублікатів не створює. */
 CREATE OR ALTER PROCEDURE dbo.sp_GenerateMonthlyInvoices
     @PeriodMonth    DATE,
@@ -186,8 +188,9 @@ BEGIN
         c.ContractID,
         1,
         @PeriodMonth,
-        @PeriodMonth,
-        DATEFROMPARTS(YEAR(@PeriodMonth), MONTH(@PeriodMonth), c.PaymentDay),
+        GREATEST(@PeriodMonth, c.SignDate),                          -- не раніше підписання договору
+        GREATEST(DATEFROMPARTS(YEAR(@PeriodMonth), MONTH(@PeriodMonth), c.PaymentDay),
+                 c.StartDate, c.SignDate, @PeriodMonth),             -- не раніше початку оренди
         ROUND(c.MonthlyRent * d.ActiveDays / @DaysInMonth, 2),
         ROUND(p.Area * @UtilitiesRate * d.ActiveDays / @DaysInMonth, 2),
         0
@@ -265,11 +268,13 @@ END;
 GO
 
 /* Нарахування пені за кожен день прострочки:
-   пеня = непогашена основна сума (оренда + комунальні − сплачено) × ставка × днів прострочки.
+   пеня = непогашена основна сума (оренда + комунальні − сплачено) × ставка × днів прострочки,
+   але не більше ніж за @MaxDays днів.
    Пеня лише зростає, зменшити її цією процедурою не можна. */
 CREATE OR ALTER PROCEDURE dbo.sp_ApplyPenalties
     @AsOfDate   DATE         = NULL,
-    @DailyRate  DECIMAL(6,4) = 0.0010   -- 0,1 % за день
+    @DailyRate  DECIMAL(6,4) = 0.0010,  -- 0,1 % за день
+    @MaxDays    INT          = 180
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -284,7 +289,7 @@ BEGIN
                  WHERE p.InvoiceID = inv.InvoiceID) AS s
     CROSS APPLY (SELECT ROUND((inv.RentAmount + inv.UtilitiesAmount - ISNULL(s.Paid, 0))
                               * @DailyRate
-                              * DATEDIFF(DAY, inv.DueDate, @AsOfDate), 2) AS NewPenalty) AS x
+                              * LEAST(DATEDIFF(DAY, inv.DueDate, @AsOfDate), @MaxDays), 2) AS NewPenalty) AS x
     WHERE inv.DueDate < @AsOfDate
       AND inv.RentAmount + inv.UtilitiesAmount > ISNULL(s.Paid, 0)
       AND x.NewPenalty > inv.PenaltyAmount;
@@ -441,6 +446,7 @@ BEGIN
         p.City,
         p.Address,
         pt.Name                                         AS PremisesType,
+        p.Floor,
         p.Area,
         COUNT(o.ContractID)                             AS ContractsCount,
         ISNULL(SUM(o.RentedDays), 0)                    AS RentedDays,
@@ -463,7 +469,7 @@ BEGIN
     ) AS o ON o.PremisesID = p.PremisesID
     WHERE (@City   IS NULL OR p.City   = @City)
       AND (@TypeID IS NULL OR p.TypeID = @TypeID)
-    GROUP BY p.PremisesID, p.City, p.Address, pt.Name, p.Area
+    GROUP BY p.PremisesID, p.City, p.Address, pt.Name, p.Floor, p.Area
     ORDER BY OccupancyPct DESC, p.City, p.Address;
 END;
 GO

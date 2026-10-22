@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS dbo.Premises;
 DROP TABLE IF EXISTS dbo.PremisesType;
 GO
 
-/* ---------- Довідник: типи приміщень (~100 записів) ---------- */
+/* ---------- Довідник: типи приміщень (18 записів) ---------- */
 CREATE TABLE dbo.PremisesType
 (
     TypeID  INT IDENTITY(1,1) NOT NULL,
@@ -27,7 +27,8 @@ CREATE TABLE dbo.Premises
     PremisesID    INT IDENTITY(1,1) NOT NULL,
     TypeID        INT               NOT NULL,
     City          NVARCHAR(50)      NOT NULL,
-    Address       NVARCHAR(200)     NOT NULL,   -- вулиця, будинок, офіс/приміщення
+    Address       NVARCHAR(200)     NOT NULL,   -- вулиця, будинок, квартира/офіс/приміщення
+    Floor         SMALLINT          NULL,       -- поверх: від'ємний — підземний, 0 — цокольний, NULL — окремий будинок
     RoomsCount    SMALLINT          NOT NULL,
     Area          DECIMAL(9,2)      NOT NULL,   -- площа, м²
     MonthlyPrice  DECIMAL(12,2)     NOT NULL,   -- поточна ціна оренди за місяць, грн
