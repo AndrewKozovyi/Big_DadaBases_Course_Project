@@ -1,0 +1,16 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="ANDRUSHA.Rental.sa"
+  DTS:DTSID="{3B2B8C2E-6F1A-4C7E-9D51-0A6C1E2F7A11}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=ANDRUSHA;User ID=sa;Initial Catalog=Rental;Provider=SQLOLEDB.1;Persist Security Info=True;Application Name=SSIS-{3B2B8C2E-6F1A-4C7E-9D51-0A6C1E2F7A11}ANDRUSHA.Rental.sa;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAAXNTqRNT4UWRB58Xy3WVSwAAAAACAAAAAAAQZgAAAAEAACAAAACeZ/kiZOIGT6x7D95BV6aR9J/hobmjCo9PGGrNp3pEXwAAAAAOgAAAAAIAACAAAAANKYG571Dnhi4UAu1w9IxjLI6UhCkxJvAlZ46PID15GHAAAADeBw9Q+S89QfVHMtKnVQqt9BcvkWsybP0pnhkcK1RYaCvle2WpYDDudO1mCW00BQwz1mcWw4yB+q4YryBxukLIrkPhDLDSCm/M0LDN7aHvMdUtCRwRAEx24AaYYpvt8hEa0J7vgWQWGfAYzbQ7CxCyQAAAAKDwAsBaBLfjeZwuNigKn8yq9H95Wqabyrek3Gxrc3Z6h2gvjsb0N7tI15CeL1owMyOApe92I4+XfBcNNG6ZU78=</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
