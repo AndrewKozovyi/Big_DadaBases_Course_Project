@@ -1,0 +1,573 @@
+﻿<DataSourceView xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="731dfeb5-c6cb-4fe7-8681-c208564d1dc1" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>RentalDW</ID>
+  <Name>RentalDW</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:CurrentLayout</Name>
+      <Value>_ALL_TABLES_</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:SchemaRestriction</Name>
+      <Value></Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:RetrieveRelationships</Name>
+      <Value>true</Value>
+    </Annotation>
+  </Annotations>
+  <DataSourceID>RentalDW</DataSourceID>
+  <Schema>
+    <xs:schema id="RentalDW" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+      <xs:element name="RentalDW" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:design-time-name="1a31da82-7e7c-4eb2-80c2-d36dfac01aca">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="dbo_Dim_Date" msprop:design-time-name="1a8ae2bd-ae7e-4175-a35b-084dc49e41e8" msprop:FriendlyName="Dim_Date" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:DbTableName="Dim_Date" msprop:Description="Вимір дати (календар зі святами України)">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="DateKey" msprop:FriendlyName="DateKey" msprop:DbColumnName="DateKey" msprop:design-time-name="6fdf4a36-88b0-41fc-9025-cb2ca0f25bcb" type="xs:int" />
+                  <xs:element name="FullDate" msprop:FriendlyName="FullDate" msprop:DbColumnName="FullDate" msprop:design-time-name="290be8e2-2c18-4a96-a713-0331e92b8038" type="xs:dateTime" />
+                  <xs:element name="Year" msprop:FriendlyName="Year" msprop:DbColumnName="Year" msprop:design-time-name="f9bb600b-9167-4413-a392-a6d433d40c8e" type="xs:short" />
+                  <xs:element name="Quarter" msprop:FriendlyName="Quarter" msprop:DbColumnName="Quarter" msprop:design-time-name="9e4f678e-24be-4970-a344-f04032543802" type="xs:unsignedByte" />
+                  <xs:element name="QuarterName" msprop:FriendlyName="QuarterName" msprop:DbColumnName="QuarterName" msprop:design-time-name="b4ee451d-580d-4878-afc9-978fb452d7cf">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="10" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Month" msprop:FriendlyName="Month" msprop:DbColumnName="Month" msprop:design-time-name="0abb7528-b8d2-452c-b833-c90ba3b74f10" type="xs:unsignedByte" />
+                  <xs:element name="MonthName" msprop:FriendlyName="MonthName" msprop:DbColumnName="MonthName" msprop:design-time-name="545c99f5-782d-4e15-9774-19d767f9c88e">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="YearMonth" msprop:FriendlyName="YearMonth" msprop:DbColumnName="YearMonth" msprop:design-time-name="86c8264f-0a0a-482a-a4e8-23c3dfc107ea" type="xs:int" />
+                  <xs:element name="Day" msprop:FriendlyName="Day" msprop:DbColumnName="Day" msprop:design-time-name="9f9380f2-92f3-435f-95cc-ea2ade2bdcc2" type="xs:unsignedByte" />
+                  <xs:element name="DayOfWeek" msprop:FriendlyName="DayOfWeek" msprop:DbColumnName="DayOfWeek" msprop:design-time-name="75b13310-7ace-492b-a3e4-c3d1e73a9765" type="xs:unsignedByte" />
+                  <xs:element name="DayName" msprop:FriendlyName="DayName" msprop:DbColumnName="DayName" msprop:design-time-name="55b12b08-38b8-4846-9a7f-10e4f9441f7d">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="15" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="WeekOfYear" msprop:FriendlyName="WeekOfYear" msprop:DbColumnName="WeekOfYear" msprop:design-time-name="64e33091-9317-43b8-a5dd-fc1bc18a042e" type="xs:unsignedByte" />
+                  <xs:element name="IsWeekend" msprop:FriendlyName="IsWeekend" msprop:DbColumnName="IsWeekend" msprop:design-time-name="911ed43f-3fcf-4000-a557-e06a0d54d317" type="xs:boolean" />
+                  <xs:element name="IsHoliday" msprop:FriendlyName="IsHoliday" msprop:DbColumnName="IsHoliday" msprop:design-time-name="13de632b-ce8c-4fdb-b55c-88659e56a21a" type="xs:boolean" />
+                  <xs:element name="HolidayName" msprop:FriendlyName="HolidayName" msprop:DbColumnName="HolidayName" msprop:design-time-name="4860a8af-f223-4482-b0e0-55f05435e3de" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="100" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="IsWorkingDay" msprop:FriendlyName="IsWorkingDay" msprop:DbColumnName="IsWorkingDay" msprop:design-time-name="6fefc961-59ca-4407-bb0a-323d071e5df2" type="xs:boolean" />
+                  <xs:element name="DateLabel" msprop:FriendlyName="DateLabel" msprop:DbColumnName="DateLabel" msprop:design-time-name="891d66b8-3195-46c5-8b81-c3ff7d021930" msdata:ReadOnly="true" msprop:ComputedColumnExpression="CONVERT(NVARCHAR(10), [FullDate], 104)" msprop:Description="Дата у форматі дд.мм.рррр" msprop:IsLogical="True" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="10" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="QuarterKey" msprop:FriendlyName="QuarterKey" msprop:DbColumnName="QuarterKey" msprop:design-time-name="948f9b32-2b08-48b9-a91d-07060cfe88ac" msdata:ReadOnly="true" msprop:ComputedColumnExpression="[Year] * 10 + [Quarter]" msprop:Description="Унікальний ключ кварталу (рік + номер)" msprop:IsLogical="True" type="xs:int" minOccurs="0" />
+                  <xs:element name="QuarterLabel" msprop:FriendlyName="QuarterLabel" msprop:DbColumnName="QuarterLabel" msprop:design-time-name="f942bc17-9915-4c90-b1ea-e9ef4c55fb13" msdata:ReadOnly="true" msprop:ComputedColumnExpression="CAST([Quarter] AS NVARCHAR(1)) + N' кв. ' + CAST([Year] AS NVARCHAR(4))" msprop:Description="Назва кварталу з роком" msprop:IsLogical="True" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="MonthLabel" msprop:FriendlyName="MonthLabel" msprop:DbColumnName="MonthLabel" msprop:design-time-name="0b4ee5c7-65ae-48f4-b237-77a1d4f8312e" msdata:ReadOnly="true" msprop:ComputedColumnExpression="[MonthName] + N' ' + CAST([Year] AS NVARCHAR(4))" msprop:Description="Назва місяця з роком" msprop:IsLogical="True" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="30" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="WeekKey" msprop:FriendlyName="WeekKey" msprop:DbColumnName="WeekKey" msprop:design-time-name="9a863d93-a6f2-4898-ba03-fc590ee46047" msdata:ReadOnly="true" msprop:ComputedColumnExpression="[Year] * 100 + [WeekOfYear]" msprop:Description="Унікальний ключ тижня (рік + номер)" msprop:IsLogical="True" type="xs:int" minOccurs="0" />
+                  <xs:element name="WeekLabel" msprop:FriendlyName="WeekLabel" msprop:DbColumnName="WeekLabel" msprop:design-time-name="8b729959-02e4-4566-ac1a-cd191a867504" msdata:ReadOnly="true" msprop:ComputedColumnExpression="N'Тиждень ' + RIGHT(N'0' + CAST([WeekOfYear] AS NVARCHAR(2)), 2) + N', ' + CAST([Year] AS NVARCHAR(4))" msprop:Description="Назва тижня з роком" msprop:IsLogical="True" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="30" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="DayTypeKey" msprop:FriendlyName="DayTypeKey" msprop:DbColumnName="DayTypeKey" msprop:design-time-name="062196c6-0a9f-4395-b4d1-049351fd50b3" msdata:ReadOnly="true" msprop:ComputedColumnExpression="CASE WHEN [IsHoliday] = 1 THEN 3 WHEN [IsWeekend] = 1 THEN 2 ELSE 1 END" msprop:Description="Тип дня: 1 робочий, 2 вихідний, 3 свято" msprop:IsLogical="True" type="xs:int" minOccurs="0" />
+                  <xs:element name="DayTypeName" msprop:FriendlyName="DayTypeName" msprop:DbColumnName="DayTypeName" msprop:design-time-name="0013c40f-f88a-4f72-a1d8-4642c1311de3" msdata:ReadOnly="true" msprop:ComputedColumnExpression="CASE WHEN [IsHoliday] = 1 THEN N'Святковий' WHEN [IsWeekend] = 1 THEN N'Вихідний' ELSE N'Робочий' END" msprop:Description="Назва типу дня" msprop:IsLogical="True" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="HolidayLabel" msprop:FriendlyName="HolidayLabel" msprop:DbColumnName="HolidayLabel" msprop:design-time-name="b7228d4c-83b6-4780-b0f4-7fa153840576" msdata:ReadOnly="true" msprop:ComputedColumnExpression="ISNULL([HolidayName], N'(не свято)')" msprop:Description="Назва свята або «(не свято)»" msprop:IsLogical="True" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="100" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="WorkingDayLabel" msprop:FriendlyName="WorkingDayLabel" msprop:DbColumnName="WorkingDayLabel" msprop:design-time-name="9a6dfcb8-e3d3-49b1-874b-706604de6b5d" msdata:ReadOnly="true" msprop:ComputedColumnExpression="CASE WHEN [IsWorkingDay] = 1 THEN N'Робочий день' ELSE N'Неробочий день' END" msprop:Description="Робочий / неробочий день" msprop:IsLogical="True" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_Dim_InvoiceStatus" msprop:design-time-name="33552861-6e7d-48d1-a2cc-ab75c2b8c9b3" msprop:FriendlyName="Dim_InvoiceStatus" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:DbTableName="Dim_InvoiceStatus" msprop:Description="Статуси рахунків">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="StatusKey" msprop:FriendlyName="StatusKey" msprop:DbColumnName="StatusKey" msprop:design-time-name="7408e235-87a0-45d0-adc6-4f3db4288d50" type="xs:int" />
+                  <xs:element name="StatusID" msprop:FriendlyName="StatusID" msprop:DbColumnName="StatusID" msprop:design-time-name="b60d13c0-6669-4955-b3da-9f49e3dda080" type="xs:int" />
+                  <xs:element name="StatusName" msprop:FriendlyName="StatusName" msprop:DbColumnName="StatusName" msprop:design-time-name="76b20747-d037-4f30-8a17-2a96e2deb51b">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="30" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_Dim_Tenant" msprop:design-time-name="ebf3579e-9008-408e-acbb-43bc955a5609" msprop:FriendlyName="Dim_Tenant" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:DbTableName="Dim_Tenant" msprop:Description="Орендарі (SCD1)">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="TenantKey" msprop:FriendlyName="TenantKey" msprop:DbColumnName="TenantKey" msprop:design-time-name="fda09b43-6c1c-4f34-aba7-e6dbf1b07c84" type="xs:int" />
+                  <xs:element name="TenantID" msprop:FriendlyName="TenantID" msprop:DbColumnName="TenantID" msprop:design-time-name="72b0c0cc-1bcb-431e-8342-584b409e28dd" type="xs:int" />
+                  <xs:element name="Name" msprop:FriendlyName="Name" msprop:DbColumnName="Name" msprop:design-time-name="3d4fb485-6ab6-4a2b-8155-47f8e0aacca7">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="150" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="TenantType" msprop:FriendlyName="TenantType" msprop:DbColumnName="TenantType" msprop:design-time-name="c83c738e-b796-4cf0-8f60-5f3417e7d2b9">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="TaxCode" msprop:FriendlyName="TaxCode" msprop:DbColumnName="TaxCode" msprop:design-time-name="92ce9a5a-c6a7-48eb-a807-cd85e9861b3f">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="10" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Phone" msprop:FriendlyName="Phone" msprop:DbColumnName="Phone" msprop:design-time-name="6adfe1ac-a887-42aa-9de5-321b93bb1f32">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="13" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Email" msprop:FriendlyName="Email" msprop:DbColumnName="Email" msprop:design-time-name="1412bfaa-5e61-4d1f-b833-a105305bf89d">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="100" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="HasEmail" msprop:FriendlyName="HasEmail" msprop:DbColumnName="HasEmail" msprop:design-time-name="de91f014-e764-454d-9acf-3932352f9ef6" type="xs:boolean" />
+                  <xs:element name="UpdatedAt" msprop:FriendlyName="UpdatedAt" msprop:DbColumnName="UpdatedAt" msprop:design-time-name="7904f04f-4b82-40ea-8583-851948795203" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="TenantLabel" msprop:FriendlyName="TenantLabel" msprop:DbColumnName="TenantLabel" msprop:design-time-name="28ca33af-d1ca-4476-95ef-737dcf94d5ed" msdata:ReadOnly="true" msprop:ComputedColumnExpression="[Name] + N' (' + [TaxCode] + N')'" msprop:Description="Назва орендаря з податковим кодом" msprop:IsLogical="True" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="170" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="EmailStatus" msprop:FriendlyName="EmailStatus" msprop:DbColumnName="EmailStatus" msprop:design-time-name="9f8fa66e-03bf-405c-993d-b84f0bf46138" msdata:ReadOnly="true" msprop:ComputedColumnExpression="CASE WHEN [HasEmail] = 1 THEN N'Є email' ELSE N'Без email' END" msprop:Description="Наявність email" msprop:IsLogical="True" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_Dim_Premises" msprop:design-time-name="7fb584e1-d71d-46e0-bd7e-1119b957e9ee" msprop:FriendlyName="Dim_Premises" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:DbTableName="Dim_Premises" msprop:Description="Приміщення (SCD2: ValidFrom / ValidTo / IsCurrent)">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="PremisesKey" msprop:FriendlyName="PremisesKey" msprop:DbColumnName="PremisesKey" msprop:design-time-name="83542aaf-7cb7-405e-9fc0-e38739d0b9b2" type="xs:int" />
+                  <xs:element name="PremisesID" msprop:FriendlyName="PremisesID" msprop:DbColumnName="PremisesID" msprop:design-time-name="b854f06b-399b-41cb-873a-07a5a848a46a" type="xs:int" />
+                  <xs:element name="City" msprop:FriendlyName="City" msprop:DbColumnName="City" msprop:design-time-name="b8df9eff-95ee-48d4-b38a-c08002053e08">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Address" msprop:FriendlyName="Address" msprop:DbColumnName="Address" msprop:design-time-name="fb8103f4-173c-446d-bef6-e1c0c3e3d6a6">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="200" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Floor" msprop:FriendlyName="Floor" msprop:DbColumnName="Floor" msprop:design-time-name="71d46454-6567-4b8b-a095-6f4b84f8ec48" type="xs:short" minOccurs="0" />
+                  <xs:element name="FloorCategory" msprop:FriendlyName="FloorCategory" msprop:DbColumnName="FloorCategory" msprop:design-time-name="d88b95a0-db68-47ca-a7b0-05ed37b19650">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="30" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="RoomsCount" msprop:FriendlyName="RoomsCount" msprop:DbColumnName="RoomsCount" msprop:design-time-name="cc6e40ec-eea7-4d7b-bcf2-5dcd5b8b87c7" type="xs:short" />
+                  <xs:element name="Area" msprop:FriendlyName="Area" msprop:DbColumnName="Area" msprop:design-time-name="99417ff7-cd74-47b1-8168-486ff00abda9" type="xs:decimal" />
+                  <xs:element name="AreaCategory" msprop:FriendlyName="AreaCategory" msprop:DbColumnName="AreaCategory" msprop:design-time-name="2f2e1490-3646-400f-8547-5391395ed32d">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="30" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="PremisesType" msprop:FriendlyName="PremisesType" msprop:DbColumnName="PremisesType" msprop:design-time-name="7247cb59-e4ff-40df-b5d9-256d9bb1d673">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="100" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="TypeGroup" msprop:FriendlyName="TypeGroup" msprop:DbColumnName="TypeGroup" msprop:design-time-name="6ce7316c-be70-4eb4-b38c-2c4816cfa2cb">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="MonthlyPrice" msprop:FriendlyName="MonthlyPrice" msprop:DbColumnName="MonthlyPrice" msprop:design-time-name="f4e9e56d-2253-4aff-baa4-88ae12391a61" type="xs:decimal" />
+                  <xs:element name="ValidFrom" msprop:FriendlyName="ValidFrom" msprop:DbColumnName="ValidFrom" msprop:design-time-name="4db702e5-ffe6-4a9f-b067-b974e2361aa9" type="xs:dateTime" />
+                  <xs:element name="ValidTo" msprop:FriendlyName="ValidTo" msprop:DbColumnName="ValidTo" msprop:design-time-name="c6d0e255-0985-4b75-8987-a710e4b4457c" type="xs:dateTime" />
+                  <xs:element name="IsCurrent" msprop:FriendlyName="IsCurrent" msprop:DbColumnName="IsCurrent" msprop:design-time-name="40579fb3-e4f9-4e68-9462-19aeeb00e9ed" type="xs:boolean" />
+                  <xs:element name="PremisesLabel" msprop:FriendlyName="PremisesLabel" msprop:DbColumnName="PremisesLabel" msprop:design-time-name="be4e03a7-8e2d-4626-9dac-5def331a6b40" msdata:ReadOnly="true" msprop:ComputedColumnExpression="[City] + N', ' + [Address]" msprop:Description="Місто й адреса приміщення" msprop:IsLogical="True" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="260" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="VersionLabel" msprop:FriendlyName="VersionLabel" msprop:DbColumnName="VersionLabel" msprop:design-time-name="457511d7-aefc-4f51-8f1c-6112cfb08b8d" msdata:ReadOnly="true" msprop:ComputedColumnExpression="[City] + N', ' + [Address] + CASE WHEN [IsCurrent] = 1 THEN N'' ELSE N' (до ' + CONVERT(NVARCHAR(10), [ValidTo], 104) + N')' END" msprop:Description="Назва версії приміщення (SCD2): для історичних версій — дата закінчення дії" msprop:IsLogical="True" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="300" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="CurrentLabel" msprop:FriendlyName="CurrentLabel" msprop:DbColumnName="CurrentLabel" msprop:design-time-name="d9e2e925-f38e-42ac-a29d-1c283a7a33b6" msdata:ReadOnly="true" msprop:ComputedColumnExpression="CASE WHEN [IsCurrent] = 1 THEN N'Поточна версія' ELSE N'Історична версія' END" msprop:Description="Тип версії SCD2" msprop:IsLogical="True" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="FloorOrder" msprop:FriendlyName="FloorOrder" msprop:DbColumnName="FloorOrder" msprop:design-time-name="4222f41f-7e71-4986-837c-3c022c325411" msdata:ReadOnly="true" msprop:ComputedColumnExpression="CASE [FloorCategory] WHEN N'Підземний' THEN 1 WHEN N'Цокольний' THEN 2 WHEN N'Перший' THEN 3 WHEN N'2–5 поверх' THEN 4 WHEN N'6–10 поверх' THEN 5 WHEN N'11+ поверх' THEN 6 ELSE 7 END" msprop:Description="Порядок категорій поверху" msprop:IsLogical="True" type="xs:int" minOccurs="0" />
+                  <xs:element name="AreaOrder" msprop:FriendlyName="AreaOrder" msprop:DbColumnName="AreaOrder" msprop:design-time-name="f2622429-30d2-4d78-9e70-47915009e96c" msdata:ReadOnly="true" msprop:ComputedColumnExpression="CASE [AreaCategory] WHEN N'до 30 м²' THEN 1 WHEN N'30–100 м²' THEN 2 WHEN N'100–500 м²' THEN 3 ELSE 4 END" msprop:Description="Порядок категорій площі" msprop:IsLogical="True" type="xs:int" minOccurs="0" />
+                  <xs:element name="PriceOrder" msprop:FriendlyName="PriceOrder" msprop:DbColumnName="PriceOrder" msprop:design-time-name="c7ae452d-41e2-47f6-93c2-7df8abfb988d" msdata:ReadOnly="true" msprop:ComputedColumnExpression="CASE WHEN [MonthlyPrice] &lt; 5000 THEN 1 WHEN [MonthlyPrice] &lt; 15000 THEN 2 WHEN [MonthlyPrice] &lt; 50000 THEN 3 ELSE 4 END" msprop:Description="Порядок цінових категорій" msprop:IsLogical="True" type="xs:int" minOccurs="0" />
+                  <xs:element name="PriceCategory" msprop:FriendlyName="PriceCategory" msprop:DbColumnName="PriceCategory" msprop:design-time-name="42f6cd34-437b-4f31-8f3f-aa603ac7e22e" msdata:ReadOnly="true" msprop:ComputedColumnExpression="CASE WHEN [MonthlyPrice] &lt; 5000 THEN N'до 5 тис. грн' WHEN [MonthlyPrice] &lt; 15000 THEN N'5–15 тис. грн' WHEN [MonthlyPrice] &lt; 50000 THEN N'15–50 тис. грн' ELSE N'понад 50 тис. грн' END" msprop:Description="Цінова категорія за місячною ставкою" msprop:IsLogical="True" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="30" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="FloorText" msprop:FriendlyName="FloorText" msprop:DbColumnName="FloorText" msprop:design-time-name="093cd444-d419-44b7-b6c0-1a91038737fe" msdata:ReadOnly="true" msprop:ComputedColumnExpression="ISNULL(CAST([Floor] AS NVARCHAR(10)), N'—')" msprop:Description="Поверх (— для окремого будинку)" msprop:IsLogical="True" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="10" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_Dim_Contract" msprop:design-time-name="ac874d0a-70d9-4539-9bb4-cba9c1de0710" msprop:FriendlyName="Dim_Contract" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:DbTableName="Dim_Contract" msprop:Description="Договори оренди (SCD1)">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="ContractKey" msprop:FriendlyName="ContractKey" msprop:DbColumnName="ContractKey" msprop:design-time-name="c6cd6981-793d-4a78-962f-91f5050b7ece" type="xs:int" />
+                  <xs:element name="ContractID" msprop:FriendlyName="ContractID" msprop:DbColumnName="ContractID" msprop:design-time-name="6a4f8e18-7a52-400f-a5ec-502c1fc86713" type="xs:int" />
+                  <xs:element name="ContractNumber" msprop:FriendlyName="ContractNumber" msprop:DbColumnName="ContractNumber" msprop:design-time-name="b8b7bf06-b1eb-4857-8d4a-da7a12458acd">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="SignDate" msprop:FriendlyName="SignDate" msprop:DbColumnName="SignDate" msprop:design-time-name="6ce379d8-e7b7-4711-8a21-c9f27195efed" type="xs:dateTime" />
+                  <xs:element name="StartDate" msprop:FriendlyName="StartDate" msprop:DbColumnName="StartDate" msprop:design-time-name="8c3b5e1c-c1fa-4856-a9d6-6ded41015d6a" type="xs:dateTime" />
+                  <xs:element name="EndDate" msprop:FriendlyName="EndDate" msprop:DbColumnName="EndDate" msprop:design-time-name="588746e0-74a9-4f2f-899b-ee14e14b025a" type="xs:dateTime" />
+                  <xs:element name="TerminationDate" msprop:FriendlyName="TerminationDate" msprop:DbColumnName="TerminationDate" msprop:design-time-name="abaaf97a-498d-46c5-924f-d0476044c60d" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="EffectiveEndDate" msprop:FriendlyName="EffectiveEndDate" msprop:DbColumnName="EffectiveEndDate" msprop:design-time-name="084b0600-a10a-4239-bc23-778cc12844b4" type="xs:dateTime" />
+                  <xs:element name="DurationMonths" msprop:FriendlyName="DurationMonths" msprop:DbColumnName="DurationMonths" msprop:design-time-name="b8065d7f-9bd6-43ba-83d8-c9eebd206f50" type="xs:int" />
+                  <xs:element name="DurationCategory" msprop:FriendlyName="DurationCategory" msprop:DbColumnName="DurationCategory" msprop:design-time-name="ec8b52bd-39e1-492a-94e5-8699bf013167">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="30" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="IsTerminated" msprop:FriendlyName="IsTerminated" msprop:DbColumnName="IsTerminated" msprop:design-time-name="ec7e7d98-79cf-4a33-9573-34742f32bc23" type="xs:boolean" />
+                  <xs:element name="MonthlyRent" msprop:FriendlyName="MonthlyRent" msprop:DbColumnName="MonthlyRent" msprop:design-time-name="be0c278e-fd1a-43c8-92ef-75a02ea81fc7" type="xs:decimal" />
+                  <xs:element name="Deposit" msprop:FriendlyName="Deposit" msprop:DbColumnName="Deposit" msprop:design-time-name="f996a1bc-9e32-4f64-9916-43fd5cd4ca24" type="xs:decimal" />
+                  <xs:element name="PaymentDay" msprop:FriendlyName="PaymentDay" msprop:DbColumnName="PaymentDay" msprop:design-time-name="4c898c5c-7365-44ba-a8f4-a7cb8d1683de" type="xs:unsignedByte" />
+                  <xs:element name="UpdatedAt" msprop:FriendlyName="UpdatedAt" msprop:DbColumnName="UpdatedAt" msprop:design-time-name="20d528fd-16ce-4bbd-b45f-c1b286f6307b" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="ContractStatus" msprop:FriendlyName="ContractStatus" msprop:DbColumnName="ContractStatus" msprop:design-time-name="0a4904ca-0e2e-422a-80d3-85cc8bbd46c9" msdata:ReadOnly="true" msprop:ComputedColumnExpression="CASE WHEN [IsTerminated] = 1 THEN N'Розірваний достроково' WHEN [EffectiveEndDate] &lt; CAST(GETDATE() AS DATE) THEN N'Завершений' ELSE N'Діючий' END" msprop:Description="Стан договору на сьогодні" msprop:IsLogical="True" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="30" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="DurationOrder" msprop:FriendlyName="DurationOrder" msprop:DbColumnName="DurationOrder" msprop:design-time-name="f94f63d5-3628-4ddb-b641-102103482e6b" msdata:ReadOnly="true" msprop:ComputedColumnExpression="CASE [DurationCategory] WHEN N'До місяця' THEN 1 WHEN N'1–3 місяці' THEN 2 WHEN N'4–6 місяців' THEN 3 ELSE 4 END" msprop:Description="Порядок категорій тривалості" msprop:IsLogical="True" type="xs:int" minOccurs="0" />
+                  <xs:element name="SignYear" msprop:FriendlyName="SignYear" msprop:DbColumnName="SignYear" msprop:design-time-name="c121823c-4314-463e-aec6-610444cebd45" msdata:ReadOnly="true" msprop:ComputedColumnExpression="YEAR([SignDate])" msprop:Description="Рік підписання" msprop:IsLogical="True" type="xs:int" minOccurs="0" />
+                  <xs:element name="PeriodLabel" msprop:FriendlyName="PeriodLabel" msprop:DbColumnName="PeriodLabel" msprop:design-time-name="e6aad5da-e922-4ddb-ba01-dfd38e5c2f43" msdata:ReadOnly="true" msprop:ComputedColumnExpression="CONVERT(NVARCHAR(10), [StartDate], 104) + N' – ' + CONVERT(NVARCHAR(10), [EffectiveEndDate], 104)" msprop:Description="Фактичний період дії договору" msprop:IsLogical="True" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="30" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_Fact_Invoice" msprop:design-time-name="88a8ab0c-d9f2-4031-ac9d-d771a413fdda" msprop:FriendlyName="Fact_Invoice" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:DbTableName="Fact_Invoice" msprop:Description="Факти: рахунки">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="InvoiceID" msprop:FriendlyName="InvoiceID" msprop:DbColumnName="InvoiceID" msprop:design-time-name="bdcdd8d0-ddc1-4f25-a85d-fe6e23f37ac1" type="xs:int" />
+                  <xs:element name="InvoiceNumber" msprop:FriendlyName="InvoiceNumber" msprop:DbColumnName="InvoiceNumber" msprop:design-time-name="c0179a9c-c14c-4c29-bd14-3b38025b5ba5">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="PeriodDateKey" msprop:FriendlyName="PeriodDateKey" msprop:DbColumnName="PeriodDateKey" msprop:design-time-name="e60af222-8b64-4151-b496-0ab7b0ebc3a9" type="xs:int" />
+                  <xs:element name="IssueDateKey" msprop:FriendlyName="IssueDateKey" msprop:DbColumnName="IssueDateKey" msprop:design-time-name="66635de1-5935-4235-9004-fd561793cde4" type="xs:int" />
+                  <xs:element name="DueDateKey" msprop:FriendlyName="DueDateKey" msprop:DbColumnName="DueDateKey" msprop:design-time-name="a2a26129-a9d7-47b1-9f57-c36ac05fb4d8" type="xs:int" />
+                  <xs:element name="LastPaymentDateKey" msprop:FriendlyName="LastPaymentDateKey" msprop:DbColumnName="LastPaymentDateKey" msprop:design-time-name="7aec59be-16bb-4b36-92fd-8ba743f8aa1f" type="xs:int" minOccurs="0" />
+                  <xs:element name="ContractKey" msprop:FriendlyName="ContractKey" msprop:DbColumnName="ContractKey" msprop:design-time-name="f8c6ee07-a4fa-47ae-bc5f-13f3c7bfa091" type="xs:int" />
+                  <xs:element name="TenantKey" msprop:FriendlyName="TenantKey" msprop:DbColumnName="TenantKey" msprop:design-time-name="4d5232f9-ed73-4bd9-ac6a-cd702dbe1bf8" type="xs:int" />
+                  <xs:element name="PremisesKey" msprop:FriendlyName="PremisesKey" msprop:DbColumnName="PremisesKey" msprop:design-time-name="1edeeeab-304a-42d6-90d0-a6316960e0cf" type="xs:int" />
+                  <xs:element name="StatusKey" msprop:FriendlyName="StatusKey" msprop:DbColumnName="StatusKey" msprop:design-time-name="80f54f40-4883-4dda-b382-c276349a2c4b" type="xs:int" />
+                  <xs:element name="RentAmount" msprop:FriendlyName="RentAmount" msprop:DbColumnName="RentAmount" msprop:design-time-name="0f5db2c1-81b6-432e-abe4-dfd6b910f1f1" type="xs:decimal" />
+                  <xs:element name="UtilitiesAmount" msprop:FriendlyName="UtilitiesAmount" msprop:DbColumnName="UtilitiesAmount" msprop:design-time-name="5b70f01c-a91a-4b97-96dc-5ab3eab1a49c" type="xs:decimal" />
+                  <xs:element name="PenaltyAmount" msprop:FriendlyName="PenaltyAmount" msprop:DbColumnName="PenaltyAmount" msprop:design-time-name="2a6f177d-b6c8-406e-99bd-a414015f087c" type="xs:decimal" />
+                  <xs:element name="TotalAmount" msprop:FriendlyName="TotalAmount" msprop:DbColumnName="TotalAmount" msprop:design-time-name="12365a25-997e-4b17-b569-8f174d5a2c99" type="xs:decimal" />
+                  <xs:element name="PaidAmount" msprop:FriendlyName="PaidAmount" msprop:DbColumnName="PaidAmount" msprop:design-time-name="b4f1b1c9-bc63-40e5-b0a9-1986509d5611" type="xs:decimal" />
+                  <xs:element name="DebtAmount" msprop:FriendlyName="DebtAmount" msprop:DbColumnName="DebtAmount" msprop:design-time-name="216f4750-59bb-446c-9856-5094b060a9ad" type="xs:decimal" />
+                  <xs:element name="DaysOverdue" msprop:FriendlyName="DaysOverdue" msprop:DbColumnName="DaysOverdue" msprop:design-time-name="e8624612-2ae5-4195-9434-8d85703c01f2" type="xs:int" />
+                  <xs:element name="IsPaid" msprop:FriendlyName="IsPaid" msprop:DbColumnName="IsPaid" msprop:design-time-name="462b6176-1249-4f57-b30f-a7628ea77bfa" type="xs:boolean" />
+                  <xs:element name="RunID" msprop:FriendlyName="RunID" msprop:DbColumnName="RunID" msprop:design-time-name="7a22e6af-9ea7-4609-bc43-5c2da4495f0e" type="xs:int" />
+                  <xs:element name="OverdueFlag" msprop:FriendlyName="OverdueFlag" msprop:DbColumnName="OverdueFlag" msprop:design-time-name="2817552a-4bd5-4cef-bc06-b4082d509e74" msdata:ReadOnly="true" msprop:ComputedColumnExpression="CASE WHEN [DaysOverdue] &gt; 0 THEN 1 ELSE 0 END" msprop:Description="1 — рахунок прострочено" msprop:IsLogical="True" type="xs:int" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_Fact_Payment" msprop:design-time-name="e59627d8-cf1e-4772-8d1b-92c8bff963a9" msprop:FriendlyName="Fact_Payment" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:DbTableName="Fact_Payment" msprop:Description="Факти: платежі">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="PaymentID" msprop:FriendlyName="PaymentID" msprop:DbColumnName="PaymentID" msprop:design-time-name="9d47ade7-d522-445d-8065-ef6330bf4797" type="xs:int" />
+                  <xs:element name="InvoiceID" msprop:FriendlyName="InvoiceID" msprop:DbColumnName="InvoiceID" msprop:design-time-name="191183a0-81b3-4d96-ada9-8edc79bfb94f" type="xs:int" />
+                  <xs:element name="PaymentDateKey" msprop:FriendlyName="PaymentDateKey" msprop:DbColumnName="PaymentDateKey" msprop:design-time-name="3bb49710-c70a-47f0-a0bf-ae1903fdb616" type="xs:int" />
+                  <xs:element name="DueDateKey" msprop:FriendlyName="DueDateKey" msprop:DbColumnName="DueDateKey" msprop:design-time-name="a1bc6ac2-9b58-4c46-bc78-09777f39d0eb" type="xs:int" />
+                  <xs:element name="ContractKey" msprop:FriendlyName="ContractKey" msprop:DbColumnName="ContractKey" msprop:design-time-name="d894fd6e-e9fc-4c80-bef1-fe28b5ed034d" type="xs:int" />
+                  <xs:element name="TenantKey" msprop:FriendlyName="TenantKey" msprop:DbColumnName="TenantKey" msprop:design-time-name="19910b5a-8dbb-463c-9cdf-5e5f86ed7820" type="xs:int" />
+                  <xs:element name="PremisesKey" msprop:FriendlyName="PremisesKey" msprop:DbColumnName="PremisesKey" msprop:design-time-name="68b101b7-ab26-4d0d-b2c6-49b7c3089a73" type="xs:int" />
+                  <xs:element name="Amount" msprop:FriendlyName="Amount" msprop:DbColumnName="Amount" msprop:design-time-name="d3271e92-0a3b-48ce-b685-a84c505116c8" type="xs:decimal" />
+                  <xs:element name="DaysLate" msprop:FriendlyName="DaysLate" msprop:DbColumnName="DaysLate" msprop:design-time-name="f78c8d31-7962-4db1-bd4f-95d7ab97e7d5" type="xs:int" />
+                  <xs:element name="PaymentTiming" msprop:FriendlyName="PaymentTiming" msprop:DbColumnName="PaymentTiming" msprop:design-time-name="d318f2c4-74b6-43fb-81e7-8953898bc092">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="RunID" msprop:FriendlyName="RunID" msprop:DbColumnName="RunID" msprop:design-time-name="8941613a-e117-4b25-ab7a-a368936942d9" type="xs:int" />
+                  <xs:element name="LateFlag" msprop:FriendlyName="LateFlag" msprop:DbColumnName="LateFlag" msprop:design-time-name="6db37e9a-d327-437f-8a3e-f4959606accd" msdata:ReadOnly="true" msprop:ComputedColumnExpression="CASE WHEN [DaysLate] &gt; 0 THEN 1 ELSE 0 END" msprop:Description="1 — оплачено із запізненням" msprop:IsLogical="True" type="xs:int" minOccurs="0" />
+                  <xs:element name="LateDays" msprop:FriendlyName="LateDays" msprop:DbColumnName="LateDays" msprop:design-time-name="c4d71f76-7d0c-4324-8c39-f76c0dbf7cde" msdata:ReadOnly="true" msprop:ComputedColumnExpression="CASE WHEN [DaysLate] &gt; 0 THEN [DaysLate] ELSE 0 END" msprop:Description="Дні запізнення (0 — вчасно)" msprop:IsLogical="True" type="xs:int" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_Fact_Occupancy" msprop:design-time-name="df5131c5-5d1b-43cd-91ad-9c61e5a8f36c" msprop:FriendlyName="Fact_Occupancy" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:DbTableName="Fact_Occupancy" msprop:Description="Факти: завантаженість приміщень по місяцях">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="PremisesKey" msprop:FriendlyName="PremisesKey" msprop:DbColumnName="PremisesKey" msprop:design-time-name="4231a338-e386-4567-9d73-f11b56dafbf7" type="xs:int" />
+                  <xs:element name="MonthDateKey" msprop:FriendlyName="MonthDateKey" msprop:DbColumnName="MonthDateKey" msprop:design-time-name="3137e1ad-3193-4430-8052-91c31def0e63" type="xs:int" />
+                  <xs:element name="RentedDays" msprop:FriendlyName="RentedDays" msprop:DbColumnName="RentedDays" msprop:design-time-name="66aff8a5-9f3e-425b-bc6a-bd71eca46f53" type="xs:int" />
+                  <xs:element name="DaysInMonth" msprop:FriendlyName="DaysInMonth" msprop:DbColumnName="DaysInMonth" msprop:design-time-name="1aed3044-fd2e-4d68-86af-74f2fce22b89" type="xs:int" />
+                  <xs:element name="OccupancyRate" msprop:FriendlyName="OccupancyRate" msprop:DbColumnName="OccupancyRate" msprop:design-time-name="14194051-fa87-4eda-9249-bc2c08338432" type="xs:decimal" />
+                  <xs:element name="ContractsCount" msprop:FriendlyName="ContractsCount" msprop:DbColumnName="ContractsCount" msprop:design-time-name="cae12b38-f2be-4ebb-ac84-dd6a39a22c72" type="xs:int" />
+                  <xs:element name="RentIncome" msprop:FriendlyName="RentIncome" msprop:DbColumnName="RentIncome" msprop:design-time-name="21f9adc1-cfdd-440a-9e66-f463b93ae709" type="xs:decimal" />
+                  <xs:element name="RunID" msprop:FriendlyName="RunID" msprop:DbColumnName="RunID" msprop:design-time-name="085775a6-be87-479b-8d2d-45c640adc157" type="xs:int" />
+                  <xs:element name="OccupiedFlag" msprop:FriendlyName="OccupiedFlag" msprop:DbColumnName="OccupiedFlag" msprop:design-time-name="a95211ac-95bc-41b6-a6c5-39efc3067d45" msdata:ReadOnly="true" msprop:ComputedColumnExpression="CASE WHEN [RentedDays] &gt; 0 THEN 1 ELSE 0 END" msprop:Description="1 — у місяці була оренда" msprop:IsLogical="True" type="xs:int" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="Contract_Facts" msprop:design-time-name="aa46222c-6d5e-49ff-9490-a0d8295809b3" msprop:QueryDefinition="SELECT c.ContractKey,
+       YEAR(c.StartDate) * 10000 + MONTH(c.StartDate) * 100 + DAY(c.StartDate) AS StartDateKey,
+       f.TenantKey,
+       f.PremisesKey,
+       c.MonthlyRent,
+       c.Deposit,
+       c.DurationMonths
+FROM dbo.Dim_Contract AS c
+LEFT JOIN (SELECT ContractKey, TenantKey, PremisesKey,
+                  ROW_NUMBER() OVER (PARTITION BY ContractKey ORDER BY PeriodDateKey DESC) AS rn
+           FROM dbo.Fact_Invoice) AS f
+       ON f.ContractKey = c.ContractKey AND f.rn = 1" msprop:DbTableName="Contract_Facts" msprop:QueryBuilder="SpecificQueryBuilder" msprop:IsLogical="True" msprop:FriendlyName="Contract_Facts" msprop:TableType="View" msprop:Description="Договори як факти: дата початку, орендар і приміщення (з останнього рахунку), ставка, депозит, тривалість">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="ContractKey" msprop:FriendlyName="ContractKey" msprop:DbColumnName="ContractKey" msprop:design-time-name="628798f3-d04c-49a5-8a2e-163de6890ba3" type="xs:int" />
+                  <xs:element name="StartDateKey" msprop:FriendlyName="StartDateKey" msprop:DbColumnName="StartDateKey" msprop:design-time-name="0567095b-ddfe-4b98-bd56-db3d5dc247c7" type="xs:int" />
+                  <xs:element name="TenantKey" msprop:FriendlyName="TenantKey" msprop:DbColumnName="TenantKey" msprop:design-time-name="380bef7e-c37d-478a-ba62-e12f71dfcbe7" type="xs:int" minOccurs="0" />
+                  <xs:element name="PremisesKey" msprop:FriendlyName="PremisesKey" msprop:DbColumnName="PremisesKey" msprop:design-time-name="43b10b70-80d8-4107-b1a8-6bd29a5c6b21" type="xs:int" minOccurs="0" />
+                  <xs:element name="MonthlyRent" msprop:FriendlyName="MonthlyRent" msprop:DbColumnName="MonthlyRent" msprop:design-time-name="32e2b49f-3c81-4e7f-bd95-ed4ccf358ac5" type="xs:decimal" />
+                  <xs:element name="Deposit" msprop:FriendlyName="Deposit" msprop:DbColumnName="Deposit" msprop:design-time-name="cd335175-aea6-47ae-88d1-d1fb236fb8c0" type="xs:decimal" />
+                  <xs:element name="DurationMonths" msprop:FriendlyName="DurationMonths" msprop:DbColumnName="DurationMonths" msprop:design-time-name="5c1018be-23b9-4ed2-bdfd-a0c1e3f10c03" type="xs:int" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="Payment_Timing" msprop:design-time-name="da019db8-5835-4619-81d8-798ec35593d9" msprop:QueryDefinition="SELECT v.PaymentTiming, v.TimingOrder
+FROM (VALUES (N'Наперед', 1), (N'Вчасно', 2), (N'Із запізненням', 3)) AS v (PaymentTiming, TimingOrder)" msprop:DbTableName="Payment_Timing" msprop:QueryBuilder="SpecificQueryBuilder" msprop:IsLogical="True" msprop:FriendlyName="Payment_Timing" msprop:TableType="View" msprop:Description="Довідник своєчасності оплати (значення, які формує ETL у Fact_Payment.PaymentTiming)">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="PaymentTiming" msprop:FriendlyName="PaymentTiming" msprop:DbColumnName="PaymentTiming" msprop:design-time-name="59f3e143-7612-489b-8beb-7e5f4899e8c8">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="TimingOrder" msprop:FriendlyName="TimingOrder" msprop:DbColumnName="TimingOrder" msprop:design-time-name="3d353f0f-8c23-4afa-ad68-826da36becb3" type="xs:int" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:choice>
+        </xs:complexType>
+        <xs:unique name="dbo_Dim_Date_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_Dim_Date" />
+          <xs:field xpath="DateKey" />
+        </xs:unique>
+        <xs:unique name="dbo_Dim_InvoiceStatus_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_Dim_InvoiceStatus" />
+          <xs:field xpath="StatusKey" />
+        </xs:unique>
+        <xs:unique name="dbo_Dim_Tenant_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_Dim_Tenant" />
+          <xs:field xpath="TenantKey" />
+        </xs:unique>
+        <xs:unique name="dbo_Dim_Premises_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_Dim_Premises" />
+          <xs:field xpath="PremisesKey" />
+        </xs:unique>
+        <xs:unique name="dbo_Dim_Contract_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_Dim_Contract" />
+          <xs:field xpath="ContractKey" />
+        </xs:unique>
+        <xs:unique name="dbo_Fact_Invoice_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_Fact_Invoice" />
+          <xs:field xpath="InvoiceID" />
+        </xs:unique>
+        <xs:unique name="dbo_Fact_Payment_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_Fact_Payment" />
+          <xs:field xpath="PaymentID" />
+        </xs:unique>
+        <xs:unique name="dbo_Fact_Occupancy_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_Fact_Occupancy" />
+          <xs:field xpath="MonthDateKey" />
+          <xs:field xpath="PremisesKey" />
+        </xs:unique>
+        <xs:unique name="Contract_Facts_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//Contract_Facts" />
+          <xs:field xpath="ContractKey" />
+        </xs:unique>
+        <xs:unique name="Payment_Timing_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//Payment_Timing" />
+          <xs:field xpath="PaymentTiming" />
+        </xs:unique>
+        <xs:keyref name="FK_Fact_Invoice_PeriodDateKey" refer="dbo_Dim_Date_Constraint1">
+          <xs:selector xpath=".//dbo_Fact_Invoice" />
+          <xs:field xpath="PeriodDateKey" />
+        </xs:keyref>
+        <xs:keyref name="FK_Fact_Invoice_IssueDateKey" refer="dbo_Dim_Date_Constraint1">
+          <xs:selector xpath=".//dbo_Fact_Invoice" />
+          <xs:field xpath="IssueDateKey" />
+        </xs:keyref>
+        <xs:keyref name="FK_Fact_Invoice_DueDateKey" refer="dbo_Dim_Date_Constraint1">
+          <xs:selector xpath=".//dbo_Fact_Invoice" />
+          <xs:field xpath="DueDateKey" />
+        </xs:keyref>
+        <xs:keyref name="FK_Fact_Invoice_LastPaymentDateKey" refer="dbo_Dim_Date_Constraint1">
+          <xs:selector xpath=".//dbo_Fact_Invoice" />
+          <xs:field xpath="LastPaymentDateKey" />
+        </xs:keyref>
+        <xs:keyref name="FK_Fact_Invoice_ContractKey" refer="dbo_Dim_Contract_Constraint1">
+          <xs:selector xpath=".//dbo_Fact_Invoice" />
+          <xs:field xpath="ContractKey" />
+        </xs:keyref>
+        <xs:keyref name="FK_Fact_Invoice_TenantKey" refer="dbo_Dim_Tenant_Constraint1">
+          <xs:selector xpath=".//dbo_Fact_Invoice" />
+          <xs:field xpath="TenantKey" />
+        </xs:keyref>
+        <xs:keyref name="FK_Fact_Invoice_PremisesKey" refer="dbo_Dim_Premises_Constraint1">
+          <xs:selector xpath=".//dbo_Fact_Invoice" />
+          <xs:field xpath="PremisesKey" />
+        </xs:keyref>
+        <xs:keyref name="FK_Fact_Invoice_StatusKey" refer="dbo_Dim_InvoiceStatus_Constraint1">
+          <xs:selector xpath=".//dbo_Fact_Invoice" />
+          <xs:field xpath="StatusKey" />
+        </xs:keyref>
+        <xs:keyref name="FK_Fact_Payment_PaymentDateKey" refer="dbo_Dim_Date_Constraint1">
+          <xs:selector xpath=".//dbo_Fact_Payment" />
+          <xs:field xpath="PaymentDateKey" />
+        </xs:keyref>
+        <xs:keyref name="FK_Fact_Payment_DueDateKey" refer="dbo_Dim_Date_Constraint1">
+          <xs:selector xpath=".//dbo_Fact_Payment" />
+          <xs:field xpath="DueDateKey" />
+        </xs:keyref>
+        <xs:keyref name="FK_Fact_Payment_ContractKey" refer="dbo_Dim_Contract_Constraint1">
+          <xs:selector xpath=".//dbo_Fact_Payment" />
+          <xs:field xpath="ContractKey" />
+        </xs:keyref>
+        <xs:keyref name="FK_Fact_Payment_TenantKey" refer="dbo_Dim_Tenant_Constraint1">
+          <xs:selector xpath=".//dbo_Fact_Payment" />
+          <xs:field xpath="TenantKey" />
+        </xs:keyref>
+        <xs:keyref name="FK_Fact_Payment_PremisesKey" refer="dbo_Dim_Premises_Constraint1">
+          <xs:selector xpath=".//dbo_Fact_Payment" />
+          <xs:field xpath="PremisesKey" />
+        </xs:keyref>
+        <xs:keyref name="FK_Fact_Occupancy_MonthDateKey" refer="dbo_Dim_Date_Constraint1">
+          <xs:selector xpath=".//dbo_Fact_Occupancy" />
+          <xs:field xpath="MonthDateKey" />
+        </xs:keyref>
+        <xs:keyref name="FK_Fact_Occupancy_PremisesKey" refer="dbo_Dim_Premises_Constraint1">
+          <xs:selector xpath=".//dbo_Fact_Occupancy" />
+          <xs:field xpath="PremisesKey" />
+        </xs:keyref>
+      </xs:element>
+      <xs:annotation>
+        <xs:appinfo>
+          <msdata:Relationship name="Contract_Facts_ContractKey" msdata:parent="dbo_Dim_Contract" msdata:child="Contract_Facts" msdata:parentkey="ContractKey" msdata:childkey="ContractKey" msprop:Description="" msprop:IsLogical="True" />
+          <msdata:Relationship name="Contract_Facts_StartDateKey" msdata:parent="dbo_Dim_Date" msdata:child="Contract_Facts" msdata:parentkey="DateKey" msdata:childkey="StartDateKey" msprop:Description="" msprop:IsLogical="True" />
+          <msdata:Relationship name="Contract_Facts_TenantKey" msdata:parent="dbo_Dim_Tenant" msdata:child="Contract_Facts" msdata:parentkey="TenantKey" msdata:childkey="TenantKey" msprop:Description="" msprop:IsLogical="True" />
+          <msdata:Relationship name="Contract_Facts_PremisesKey" msdata:parent="dbo_Dim_Premises" msdata:child="Contract_Facts" msdata:parentkey="PremisesKey" msdata:childkey="PremisesKey" msprop:Description="" msprop:IsLogical="True" />
+          <msdata:Relationship name="dbo_Fact_Payment_PaymentTiming" msdata:parent="Payment_Timing" msdata:child="dbo_Fact_Payment" msdata:parentkey="PaymentTiming" msdata:childkey="PaymentTiming" msprop:Description="" msprop:IsLogical="True" />
+        </xs:appinfo>
+      </xs:annotation>
+    </xs:schema>
+    <RentalDW xmlns="" />
+  </Schema>
+</DataSourceView>

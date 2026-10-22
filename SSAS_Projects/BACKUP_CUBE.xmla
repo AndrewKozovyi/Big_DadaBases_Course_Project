@@ -1,0 +1,15 @@
+﻿<!--
+  Резервна копія бази Analysis Services Rental_SSAS (куб «Оренда» з вимірами, агрегаціями та даними).
+  SSMS: підключення Analysis Services -> New Query -> XMLA -> виконати (F5).
+  Файл створюється в папці резервних копій SSAS (BackupDir), наприклад:
+  C:\Program Files\Microsoft SQL Server\MSAS16.MSSQLSERVER\OLAP\Backup\Rental_SSAS.abf
+  Відновлення: SSMS -> Databases (Analysis Services) -> Restore... -> вибрати Rental_SSAS.abf.
+-->
+<Backup xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <Object>
+    <DatabaseID>Rental_SSAS</DatabaseID>
+  </Object>
+  <File>Rental_SSAS.abf</File>
+  <AllowOverwrite>true</AllowOverwrite>
+  <ApplyCompression>true</ApplyCompression>
+</Backup>

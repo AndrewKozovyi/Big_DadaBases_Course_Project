@@ -1,0 +1,3209 @@
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="35462873-2083-43b5-9138-4f8a935a1a3e" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Rental</ID>
+  <MeasureGroups>
+    <MeasureGroup>
+      <ID>Invoices</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="6383c455-2ca4-4728-b931-480626d5c329">
+          <ID>Рахунки 2021</ID>
+          <Name>Рахунки до 2022</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="QueryBinding" dwd:design-time-name="2c1dff84-1d36-4070-a2bb-225b3025731a">
+            <DataSourceID>RentalDW</DataSourceID>
+            <QueryDefinition>SELECT f.*,
+       CASE WHEN f.DaysOverdue &gt; 0 THEN 1 ELSE 0 END AS OverdueFlag
+FROM dbo.Fact_Invoice AS f
+WHERE f.PeriodDateKey &lt; 20220101</QueryDefinition>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+          <EstimatedRows>4454</EstimatedRows>
+          <AggregationDesignID>AggregationDesign</AggregationDesignID>
+        </Partition>
+        <Partition dwd:design-time-name="d39c34f3-35c6-465f-ac21-e9bcda6cb186">
+          <ID>Рахунки 2022</ID>
+          <Name>Рахунки 2022</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="QueryBinding" dwd:design-time-name="6c4b5a2e-5754-48da-99d3-5af449869e3a">
+            <DataSourceID>RentalDW</DataSourceID>
+            <QueryDefinition>SELECT f.*,
+       CASE WHEN f.DaysOverdue &gt; 0 THEN 1 ELSE 0 END AS OverdueFlag
+FROM dbo.Fact_Invoice AS f
+WHERE f.PeriodDateKey &gt;= 20220101 AND f.PeriodDateKey &lt; 20230101</QueryDefinition>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+          <AggregationDesignID>AggregationDesign</AggregationDesignID>
+        </Partition>
+        <Partition dwd:design-time-name="821a3c9e-921e-4e75-bdb9-8d3aa93d1c2d">
+          <ID>Рахунки 2023</ID>
+          <Name>Рахунки 2023</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="QueryBinding" dwd:design-time-name="ef16394c-75e6-43d4-9155-b4348c51bd1f">
+            <DataSourceID>RentalDW</DataSourceID>
+            <QueryDefinition>SELECT f.*,
+       CASE WHEN f.DaysOverdue &gt; 0 THEN 1 ELSE 0 END AS OverdueFlag
+FROM dbo.Fact_Invoice AS f
+WHERE f.PeriodDateKey &gt;= 20230101 AND f.PeriodDateKey &lt; 20240101</QueryDefinition>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+          <AggregationDesignID>AggregationDesign</AggregationDesignID>
+        </Partition>
+        <Partition dwd:design-time-name="37672c70-f2f9-4c88-a350-aafeb43bc829">
+          <ID>Рахунки 2024</ID>
+          <Name>Рахунки 2024</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="QueryBinding" dwd:design-time-name="25c2f327-c66e-481b-91e8-8f61c65fdd54">
+            <DataSourceID>RentalDW</DataSourceID>
+            <QueryDefinition>SELECT f.*,
+       CASE WHEN f.DaysOverdue &gt; 0 THEN 1 ELSE 0 END AS OverdueFlag
+FROM dbo.Fact_Invoice AS f
+WHERE f.PeriodDateKey &gt;= 20240101 AND f.PeriodDateKey &lt; 20250101</QueryDefinition>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+          <AggregationDesignID>AggregationDesign</AggregationDesignID>
+        </Partition>
+        <Partition dwd:design-time-name="7c6bc188-185f-429d-8034-c63f77582e78">
+          <ID>Рахунки 2025</ID>
+          <Name>Рахунки 2025</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="QueryBinding" dwd:design-time-name="23522c6a-3e9c-4e4c-b7f8-ffe18f45e483">
+            <DataSourceID>RentalDW</DataSourceID>
+            <QueryDefinition>SELECT f.*,
+       CASE WHEN f.DaysOverdue &gt; 0 THEN 1 ELSE 0 END AS OverdueFlag
+FROM dbo.Fact_Invoice AS f
+WHERE f.PeriodDateKey &gt;= 20250101 AND f.PeriodDateKey &lt; 20260101</QueryDefinition>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+          <AggregationDesignID>AggregationDesign</AggregationDesignID>
+        </Partition>
+        <Partition dwd:design-time-name="c2295dd5-3bbd-44fe-997e-f7e62d6e3620">
+          <ID>Рахунки 2026</ID>
+          <Name>Рахунки 2026 і далі</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="QueryBinding" dwd:design-time-name="c90d4088-44e3-4a97-99cd-004926e1ee39">
+            <DataSourceID>RentalDW</DataSourceID>
+            <QueryDefinition>SELECT f.*,
+       CASE WHEN f.DaysOverdue &gt; 0 THEN 1 ELSE 0 END AS OverdueFlag
+FROM dbo.Fact_Invoice AS f
+WHERE f.PeriodDateKey &gt;= 20260101</QueryDefinition>
+          </Source>
+          <StorageMode>Holap</StorageMode>
+          <CurrentStorageMode>Holap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+          <AggregationDesignID>AggregationDesign</AggregationDesignID>
+        </Partition>
+      </Partitions>
+      <AggregationDesigns>
+        <AggregationDesign>
+          <ID>AggregationDesign</ID>
+          <Name>AggregationDesign</Name>
+          <CreatedTimestamp>2026-10-22T16:28:56.72Z</CreatedTimestamp>
+          <LastSchemaUpdate>2026-10-22T16:28:56.72Z</LastSchemaUpdate>
+          <EstimatedRows>4454</EstimatedRows>
+          <Dimensions>
+            <Dimension>
+              <CubeDimensionID>Period</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Date</AttributeID>
+                  <EstimatedCount>2556</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Year</AttributeID>
+                  <EstimatedCount>7</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Quarter</AttributeID>
+                  <EstimatedCount>28</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Month</AttributeID>
+                  <EstimatedCount>84</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Month Of Year</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Week</AttributeID>
+                  <EstimatedCount>371</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Day Of Week</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Day Type</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Holiday</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Working Day</AttributeID>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>Due Date</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Date</AttributeID>
+                  <EstimatedCount>2556</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Year</AttributeID>
+                  <EstimatedCount>7</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Quarter</AttributeID>
+                  <EstimatedCount>28</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Month</AttributeID>
+                  <EstimatedCount>84</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Month Of Year</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Week</AttributeID>
+                  <EstimatedCount>371</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Day Of Week</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Day Type</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Holiday</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Working Day</AttributeID>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>Premises</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Premises Version</AttributeID>
+                  <EstimatedCount>5020</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Premises</AttributeID>
+                  <EstimatedCount>5000</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>City</AttributeID>
+                  <EstimatedCount>10</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Premises Type</AttributeID>
+                  <EstimatedCount>18</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Type Group</AttributeID>
+                  <EstimatedCount>5</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Floor Category</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Area Category</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Price Category</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Is Current</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Address</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Rooms</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Floor</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Area</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Monthly Price</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Valid From</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Valid To</AttributeID>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>Tenant</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Tenant</AttributeID>
+                  <EstimatedCount>50001</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Tenant Type</AttributeID>
+                  <EstimatedCount>3</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Email Status</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Tax Code</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Phone</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Email</AttributeID>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>Contract</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Contract</AttributeID>
+                  <EstimatedCount>100001</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Duration Category</AttributeID>
+                  <EstimatedCount>4</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Contract Status</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Sign Year</AttributeID>
+                  <EstimatedCount>6</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Payment Day</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Monthly Rent</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Deposit</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Contract Period</AttributeID>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>Invoice Status</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Status</AttributeID>
+                  <EstimatedCount>4</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Status Order</AttributeID>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+          </Dimensions>
+          <Aggregations>
+            <Aggregation>
+              <ID>Aggregation 0</ID>
+              <Name>Aggregation 0</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Tenant Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Sign Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Invoice Status</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 1</ID>
+              <Name>Aggregation 1</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Tenant Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Invoice Status</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 2</ID>
+              <Name>Aggregation 2</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Tenant Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Invoice Status</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 3</ID>
+              <Name>Aggregation 3</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Duration Category</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>Sign Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Invoice Status</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 4</ID>
+              <Name>Aggregation 4</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Sign Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Invoice Status</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Status</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 5</ID>
+              <Name>Aggregation 5</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Tenant Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Duration Category</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Invoice Status</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Status</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 6</ID>
+              <Name>Aggregation 6</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Premises Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Tenant Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Invoice Status</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 7</ID>
+              <Name>Aggregation 7</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Duration Category</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Invoice Status</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 8</ID>
+              <Name>Aggregation 8</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Invoice Status</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Status</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 9</ID>
+              <Name>Aggregation 9</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Duration Category</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Invoice Status</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation a</ID>
+              <Name>Aggregation a</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Quarter</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Invoice Status</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation b</ID>
+              <Name>Aggregation b</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Invoice Status</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Status</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation c</ID>
+              <Name>Aggregation c</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Quarter</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Invoice Status</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation d</ID>
+              <Name>Aggregation d</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>City</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Tenant Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Invoice Status</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation e</ID>
+              <Name>Aggregation e</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Type Group</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Sign Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Invoice Status</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation f</ID>
+              <Name>Aggregation f</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Type Group</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Tenant Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Duration Category</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Invoice Status</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 10</ID>
+              <Name>Aggregation 10</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Type Group</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Tenant Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Invoice Status</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Status</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 11</ID>
+              <Name>Aggregation 11</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Type Group</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Invoice Status</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 12</ID>
+              <Name>Aggregation 12</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Type Group</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Invoice Status</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 13</ID>
+              <Name>Aggregation 13</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>City</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Invoice Status</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Status</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 14</ID>
+              <Name>Aggregation 14</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>City</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Duration Category</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Invoice Status</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 15</ID>
+              <Name>Aggregation 15</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Sign Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Invoice Status</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 16</ID>
+              <Name>Aggregation 16</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Sign Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Invoice Status</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 17</ID>
+              <Name>Aggregation 17</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Invoice Status</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 18</ID>
+              <Name>Aggregation 18</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>City</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>Type Group</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Invoice Status</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 19</ID>
+              <Name>Aggregation 19</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>City</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Sign Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Invoice Status</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 1a</ID>
+              <Name>Aggregation 1a</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>City</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Invoice Status</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 1b</ID>
+              <Name>Aggregation 1b</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>City</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Invoice Status</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+          </Aggregations>
+        </AggregationDesign>
+      </AggregationDesigns>
+    </MeasureGroup>
+    <MeasureGroup>
+      <ID>Payments</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="91468948-1573-4d02-a4d2-dbb97ce4a93b">
+          <ID>Платежі 2021</ID>
+          <Name>Платежі до 2022</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="QueryBinding" dwd:design-time-name="05f993fd-78c5-4686-961a-d76884ec98f7">
+            <DataSourceID>RentalDW</DataSourceID>
+            <QueryDefinition>SELECT f.*,
+       CASE WHEN f.DaysLate &gt; 0 THEN 1 ELSE 0 END AS LateFlag,
+       CASE WHEN f.DaysLate &gt; 0 THEN f.DaysLate ELSE 0 END AS LateDays
+FROM dbo.Fact_Payment AS f
+WHERE f.PaymentDateKey &lt; 20220101</QueryDefinition>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+          <EstimatedRows>4181</EstimatedRows>
+          <AggregationDesignID>AggregationDesign</AggregationDesignID>
+        </Partition>
+        <Partition dwd:design-time-name="2109c385-0d51-428c-90b9-0c91b56ed36d">
+          <ID>Платежі 2022</ID>
+          <Name>Платежі 2022</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="QueryBinding" dwd:design-time-name="f058051b-fa19-4664-8fd5-a9f93bafd877">
+            <DataSourceID>RentalDW</DataSourceID>
+            <QueryDefinition>SELECT f.*,
+       CASE WHEN f.DaysLate &gt; 0 THEN 1 ELSE 0 END AS LateFlag,
+       CASE WHEN f.DaysLate &gt; 0 THEN f.DaysLate ELSE 0 END AS LateDays
+FROM dbo.Fact_Payment AS f
+WHERE f.PaymentDateKey &gt;= 20220101 AND f.PaymentDateKey &lt; 20230101</QueryDefinition>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+          <AggregationDesignID>AggregationDesign</AggregationDesignID>
+        </Partition>
+        <Partition dwd:design-time-name="a5d2111f-c830-4248-82cf-4e828f996c81">
+          <ID>Платежі 2023</ID>
+          <Name>Платежі 2023</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="QueryBinding" dwd:design-time-name="a9615fd8-9f72-44a2-8e32-5abb95ebf679">
+            <DataSourceID>RentalDW</DataSourceID>
+            <QueryDefinition>SELECT f.*,
+       CASE WHEN f.DaysLate &gt; 0 THEN 1 ELSE 0 END AS LateFlag,
+       CASE WHEN f.DaysLate &gt; 0 THEN f.DaysLate ELSE 0 END AS LateDays
+FROM dbo.Fact_Payment AS f
+WHERE f.PaymentDateKey &gt;= 20230101 AND f.PaymentDateKey &lt; 20240101</QueryDefinition>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+          <AggregationDesignID>AggregationDesign</AggregationDesignID>
+        </Partition>
+        <Partition dwd:design-time-name="5ac734e3-c883-4bfa-9d62-a241b58b7423">
+          <ID>Платежі 2024</ID>
+          <Name>Платежі 2024</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="QueryBinding" dwd:design-time-name="56c8fb44-623a-49c0-ad06-c18b58dcd1a4">
+            <DataSourceID>RentalDW</DataSourceID>
+            <QueryDefinition>SELECT f.*,
+       CASE WHEN f.DaysLate &gt; 0 THEN 1 ELSE 0 END AS LateFlag,
+       CASE WHEN f.DaysLate &gt; 0 THEN f.DaysLate ELSE 0 END AS LateDays
+FROM dbo.Fact_Payment AS f
+WHERE f.PaymentDateKey &gt;= 20240101 AND f.PaymentDateKey &lt; 20250101</QueryDefinition>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+          <AggregationDesignID>AggregationDesign</AggregationDesignID>
+        </Partition>
+        <Partition dwd:design-time-name="af6b9acd-085f-42da-baca-1820e2f968aa">
+          <ID>Платежі 2025</ID>
+          <Name>Платежі 2025</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="QueryBinding" dwd:design-time-name="e7f704bd-e38c-4781-8e7d-74e778ae46c4">
+            <DataSourceID>RentalDW</DataSourceID>
+            <QueryDefinition>SELECT f.*,
+       CASE WHEN f.DaysLate &gt; 0 THEN 1 ELSE 0 END AS LateFlag,
+       CASE WHEN f.DaysLate &gt; 0 THEN f.DaysLate ELSE 0 END AS LateDays
+FROM dbo.Fact_Payment AS f
+WHERE f.PaymentDateKey &gt;= 20250101 AND f.PaymentDateKey &lt; 20260101</QueryDefinition>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+          <AggregationDesignID>AggregationDesign</AggregationDesignID>
+        </Partition>
+        <Partition dwd:design-time-name="063012dd-e8fb-4a48-b19a-41b23d6df777">
+          <ID>Платежі 2026</ID>
+          <Name>Платежі 2026 і далі</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="QueryBinding" dwd:design-time-name="54f2db09-04c5-4f0d-b6ce-3d60e08584f5">
+            <DataSourceID>RentalDW</DataSourceID>
+            <QueryDefinition>SELECT f.*,
+       CASE WHEN f.DaysLate &gt; 0 THEN 1 ELSE 0 END AS LateFlag,
+       CASE WHEN f.DaysLate &gt; 0 THEN f.DaysLate ELSE 0 END AS LateDays
+FROM dbo.Fact_Payment AS f
+WHERE f.PaymentDateKey &gt;= 20260101</QueryDefinition>
+          </Source>
+          <StorageMode>Holap</StorageMode>
+          <CurrentStorageMode>Holap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+          <AggregationDesignID>AggregationDesign</AggregationDesignID>
+        </Partition>
+      </Partitions>
+      <AggregationDesigns>
+        <AggregationDesign>
+          <ID>AggregationDesign</ID>
+          <Name>AggregationDesign</Name>
+          <CreatedTimestamp>2026-10-22T16:29:39.62Z</CreatedTimestamp>
+          <LastSchemaUpdate>2026-10-22T16:29:39.62Z</LastSchemaUpdate>
+          <EstimatedRows>4181</EstimatedRows>
+          <Dimensions>
+            <Dimension>
+              <CubeDimensionID>Period</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Date</AttributeID>
+                  <EstimatedCount>2556</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Year</AttributeID>
+                  <EstimatedCount>7</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Quarter</AttributeID>
+                  <EstimatedCount>28</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Month</AttributeID>
+                  <EstimatedCount>84</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Month Of Year</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Week</AttributeID>
+                  <EstimatedCount>371</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Day Of Week</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Day Type</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Holiday</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Working Day</AttributeID>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>Due Date</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Date</AttributeID>
+                  <EstimatedCount>2556</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Year</AttributeID>
+                  <EstimatedCount>7</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Quarter</AttributeID>
+                  <EstimatedCount>28</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Month</AttributeID>
+                  <EstimatedCount>84</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Month Of Year</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Week</AttributeID>
+                  <EstimatedCount>371</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Day Of Week</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Day Type</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Holiday</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Working Day</AttributeID>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>Premises</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Premises Version</AttributeID>
+                  <EstimatedCount>5020</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Premises</AttributeID>
+                  <EstimatedCount>5000</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>City</AttributeID>
+                  <EstimatedCount>10</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Premises Type</AttributeID>
+                  <EstimatedCount>18</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Type Group</AttributeID>
+                  <EstimatedCount>5</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Floor Category</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Area Category</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Price Category</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Is Current</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Address</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Rooms</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Floor</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Area</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Monthly Price</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Valid From</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Valid To</AttributeID>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>Tenant</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Tenant</AttributeID>
+                  <EstimatedCount>50001</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Tenant Type</AttributeID>
+                  <EstimatedCount>3</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Email Status</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Tax Code</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Phone</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Email</AttributeID>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>Contract</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Contract</AttributeID>
+                  <EstimatedCount>100001</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Duration Category</AttributeID>
+                  <EstimatedCount>4</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Contract Status</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Sign Year</AttributeID>
+                  <EstimatedCount>6</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Payment Day</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Monthly Rent</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Deposit</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Contract Period</AttributeID>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>Payment Timing</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Payment Timing</AttributeID>
+                  <EstimatedCount>3</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Timing Order</AttributeID>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+          </Dimensions>
+          <Aggregations>
+            <Aggregation>
+              <ID>Aggregation 0</ID>
+              <Name>Aggregation 0</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>City</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Tenant Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Payment Timing</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 1</ID>
+              <Name>Aggregation 1</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Tenant Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Duration Category</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Payment Timing</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 2</ID>
+              <Name>Aggregation 2</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>City</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Duration Category</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 3</ID>
+              <Name>Aggregation 3</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Sign Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 4</ID>
+              <Name>Aggregation 4</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Sign Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 5</ID>
+              <Name>Aggregation 5</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Type Group</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Tenant Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Payment Timing</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 6</ID>
+              <Name>Aggregation 6</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 7</ID>
+              <Name>Aggregation 7</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>City</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>Type Group</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 8</ID>
+              <Name>Aggregation 8</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Type Group</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Payment Timing</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 9</ID>
+              <Name>Aggregation 9</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Type Group</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Tenant Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation a</ID>
+              <Name>Aggregation a</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Tenant Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Sign Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Payment Timing</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation b</ID>
+              <Name>Aggregation b</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Premises Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Tenant Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation c</ID>
+              <Name>Aggregation c</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Premises Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Payment Timing</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation d</ID>
+              <Name>Aggregation d</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Type Group</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Duration Category</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Payment Timing</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation e</ID>
+              <Name>Aggregation e</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Type Group</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Tenant Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Duration Category</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation f</ID>
+              <Name>Aggregation f</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>City</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Sign Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 10</ID>
+              <Name>Aggregation 10</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Tenant Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Payment Timing</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 11</ID>
+              <Name>Aggregation 11</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Tenant Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Payment Timing</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 12</ID>
+              <Name>Aggregation 12</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>City</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 13</ID>
+              <Name>Aggregation 13</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>City</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 14</ID>
+              <Name>Aggregation 14</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Premises Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Duration Category</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 15</ID>
+              <Name>Aggregation 15</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Tenant Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Duration Category</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>Sign Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 16</ID>
+              <Name>Aggregation 16</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Duration Category</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>Sign Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Payment Timing</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 17</ID>
+              <Name>Aggregation 17</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Quarter</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Payment Timing</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 18</ID>
+              <Name>Aggregation 18</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Quarter</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Tenant Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 19</ID>
+              <Name>Aggregation 19</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Quarter</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Payment Timing</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 1a</ID>
+              <Name>Aggregation 1a</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Month</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 1b</ID>
+              <Name>Aggregation 1b</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Quarter</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Tenant Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 1c</ID>
+              <Name>Aggregation 1c</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Month</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 1d</ID>
+              <Name>Aggregation 1d</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Tenant Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Duration Category</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 1e</ID>
+              <Name>Aggregation 1e</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Tenant Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Duration Category</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 1f</ID>
+              <Name>Aggregation 1f</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Duration Category</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Payment Timing</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 20</ID>
+              <Name>Aggregation 20</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Duration Category</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Payment Timing</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 21</ID>
+              <Name>Aggregation 21</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Type Group</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Tenant Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Sign Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 22</ID>
+              <Name>Aggregation 22</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Due Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Type Group</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Tenant</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Contract</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Sign Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Payment Timing</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Payment Timing</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+          </Aggregations>
+        </AggregationDesign>
+      </AggregationDesigns>
+    </MeasureGroup>
+    <MeasureGroup>
+      <ID>Occupancy</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="204f65c2-9d2a-4eba-a5ec-66abe5548cff">
+          <ID>Завантаженість</ID>
+          <Name>Завантаженість</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="04417514-b3ce-4bb5-8196-6af3390a4da4">
+            <DataSourceViewID>RentalDW</DataSourceViewID>
+            <TableID>dbo_Fact_Occupancy</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+          <EstimatedRows>300000</EstimatedRows>
+          <AggregationDesignID>AggregationDesign</AggregationDesignID>
+        </Partition>
+      </Partitions>
+      <AggregationDesigns>
+        <AggregationDesign>
+          <ID>AggregationDesign</ID>
+          <Name>AggregationDesign</Name>
+          <CreatedTimestamp>2026-10-22T16:30:18.936667Z</CreatedTimestamp>
+          <LastSchemaUpdate>2026-10-22T16:30:18.936667Z</LastSchemaUpdate>
+          <EstimatedRows>300000</EstimatedRows>
+          <Dimensions>
+            <Dimension>
+              <CubeDimensionID>Period</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Date</AttributeID>
+                  <EstimatedCount>2556</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Year</AttributeID>
+                  <EstimatedCount>7</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Quarter</AttributeID>
+                  <EstimatedCount>28</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Month</AttributeID>
+                  <EstimatedCount>84</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Month Of Year</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Week</AttributeID>
+                  <EstimatedCount>371</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Day Of Week</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Day Type</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Holiday</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Working Day</AttributeID>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>Premises</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Premises Version</AttributeID>
+                  <EstimatedCount>5020</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Premises</AttributeID>
+                  <EstimatedCount>5000</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>City</AttributeID>
+                  <EstimatedCount>10</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Premises Type</AttributeID>
+                  <EstimatedCount>18</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Type Group</AttributeID>
+                  <EstimatedCount>5</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Floor Category</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Area Category</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Price Category</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Is Current</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Address</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Rooms</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Floor</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Area</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Monthly Price</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Valid From</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Valid To</AttributeID>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+          </Dimensions>
+          <Aggregations>
+            <Aggregation>
+              <ID>Aggregation 0</ID>
+              <Name>Aggregation 0</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>City</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>Premises Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 1</ID>
+              <Name>Aggregation 1</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Week</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 2</ID>
+              <Name>Aggregation 2</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Month</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Type Group</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 3</ID>
+              <Name>Aggregation 3</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Month</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>City</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 4</ID>
+              <Name>Aggregation 4</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Period</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Quarter</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Premises</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Premises Type</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+          </Aggregations>
+        </AggregationDesign>
+      </AggregationDesigns>
+    </MeasureGroup>
+    <MeasureGroup>
+      <ID>Contracts</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="bbed239f-bb5d-467a-a111-5188bcaaaa16">
+          <ID>Договори</ID>
+          <Name>Договори</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="1afb5848-0cbd-40af-9797-3f4716b682d2">
+            <DataSourceViewID>RentalDW</DataSourceViewID>
+            <TableID>Contract_Facts</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+    <MeasureGroup>
+      <ID>Unique Tenants</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="78ab22ec-2b90-4a1a-b364-b9a93c49b14a">
+          <ID>Унікальні орендарі</ID>
+          <Name>Унікальні орендарі</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="38432447-4949-486b-aeca-d288afc501a9">
+            <DataSourceViewID>RentalDW</DataSourceViewID>
+            <TableID>dbo_Fact_Invoice</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+    <MeasureGroup>
+      <ID>Unique Premises</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="f28c93f1-b3ac-4b9b-902c-3bff01e6737d">
+          <ID>Унікальні приміщення</ID>
+          <Name>Унікальні приміщення</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="de7196a1-9162-47d4-b195-d2fd6ff6916c">
+            <DataSourceViewID>RentalDW</DataSourceViewID>
+            <TableID>dbo_Fact_Invoice</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+  </MeasureGroups>
+</Cube>

@@ -1,0 +1,300 @@
+﻿<Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="8bd6f6ba-a1e7-41ff-8f1d-bac490c49aa5" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Dim Contract</ID>
+  <Name>Договір</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Description>Договори оренди (SCD Type 1)</Description>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <Source xsi:type="DataSourceViewBinding" dwd:design-time-name="9aca9a84-f350-4994-8d3e-daa1a3b25e96">
+    <DataSourceViewID>RentalDW</DataSourceViewID>
+  </Source>
+  <UnknownMember>Hidden</UnknownMember>
+  <CurrentStorageMode>Molap</CurrentStorageMode>
+  <UnknownMemberName>Невідомо</UnknownMemberName>
+  <Attributes>
+    <Attribute dwd:design-time-name="1e070f99-4a38-4c03-b444-09df6e894db2">
+      <ID>Contract</ID>
+      <Name>Договір</Name>
+      <Usage>Key</Usage>
+      <EstimatedCount>100001</EstimatedCount>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="fcd56e92-b288-453d-a045-dfa18cd9c7c1">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="4e8ecac4-efca-48be-87f7-c566a6f693d5">
+            <TableID>dbo_Dim_Contract</TableID>
+            <ColumnID>ContractKey</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="8f182514-27c6-473a-8d54-cf788a8784cf">
+        <DataType>WChar</DataType>
+        <DataSize>20</DataSize>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="9d6a5329-c028-48fb-b0fa-9a4940eb4b6e">
+          <TableID>dbo_Dim_Contract</TableID>
+          <ColumnID>ContractNumber</ColumnID>
+        </Source>
+      </NameColumn>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="1125d0e7-60b2-46e5-84d2-d5786a910dcb">
+          <AttributeID>Duration Category</AttributeID>
+          <Name>Тривалість</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="70c0d985-a4e3-4810-b144-d7224dc2a3a0">
+          <AttributeID>Contract Status</AttributeID>
+          <Name>Стан договору</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="b7ac9549-f0df-4167-a4c3-d4683803164b">
+          <AttributeID>Sign Year</AttributeID>
+          <Name>Рік підписання</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="eaeb007d-f5b3-4b69-aed6-bedf3e092dc2">
+          <AttributeID>Payment Day</AttributeID>
+          <Name>День оплати</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="31c4e465-3d76-430e-88ca-062f8c5615c7">
+          <AttributeID>Monthly Rent</AttributeID>
+          <Name>Орендна плата</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="012709a9-a293-4e63-b335-ce7a9a06a08a">
+          <AttributeID>Deposit</AttributeID>
+          <Name>Депозит</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="bbd17fe1-f3ae-486f-9bed-7242e552e47c">
+          <AttributeID>Contract Period</AttributeID>
+          <Name>Період дії</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="adb3d8fc-f1f9-4d66-9b57-81bc60ff6c29">
+      <ID>Duration Category</ID>
+      <Name>Тривалість</Name>
+      <EstimatedCount>4</EstimatedCount>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="b61059b9-fa5a-4a88-84fb-5754e7f76382">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="9838029b-cc40-409f-8c8d-27b3a50f6e6a">
+            <TableID>dbo_Dim_Contract</TableID>
+            <ColumnID>DurationOrder</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="8563b3aa-444b-4eae-a5e4-7d51d3a08447">
+        <DataType>WChar</DataType>
+        <DataSize>30</DataSize>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="636474c4-4157-4aea-ac9f-21cbcb42cdf3">
+          <TableID>dbo_Dim_Contract</TableID>
+          <ColumnID>DurationCategory</ColumnID>
+        </Source>
+      </NameColumn>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="2b0e620a-2b79-490a-b61b-675a2ade0419">
+      <ID>Contract Status</ID>
+      <Name>Стан договору</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="4df563ca-a64a-4a9c-8d93-2732aa34d1aa">
+          <DataType>WChar</DataType>
+          <DataSize>30</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="4716eab6-f47a-4e99-9f14-1e297ff6c016">
+            <TableID>dbo_Dim_Contract</TableID>
+            <ColumnID>ContractStatus</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="77588ccf-dd58-41c4-bcd1-f91d898ef84f">
+      <ID>Sign Year</ID>
+      <Name>Рік підписання</Name>
+      <EstimatedCount>6</EstimatedCount>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="a56d6661-0e39-429b-9a54-12788d79b353">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="05018516-1c83-4077-aba0-f28f2c905da3">
+            <TableID>dbo_Dim_Contract</TableID>
+            <ColumnID>SignYear</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="fbf51fa0-2cf6-41b4-bb20-2f09033230ff">
+        <DataType>WChar</DataType>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="7595d609-9435-454c-9677-c152b5d7a6c0">
+          <TableID>dbo_Dim_Contract</TableID>
+          <ColumnID>SignYear</ColumnID>
+        </Source>
+      </NameColumn>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="2d2ea97f-37f8-4a07-9c47-7c799d41c4cf">
+      <ID>Payment Day</ID>
+      <Name>День оплати</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="60f60366-ee1c-4139-a367-d5aeafeb590c">
+          <DataType>UnsignedTinyInt</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="1eae9545-4e85-4940-81c9-40f77db52f09">
+            <TableID>dbo_Dim_Contract</TableID>
+            <ColumnID>PaymentDay</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="5dc76fe8-34f2-453f-b578-9ff45be7e226">
+        <DataType>WChar</DataType>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="c28347ac-8432-4693-a5c5-48b82afa4125">
+          <TableID>dbo_Dim_Contract</TableID>
+          <ColumnID>PaymentDay</ColumnID>
+        </Source>
+      </NameColumn>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="5c349a58-9868-44be-8678-af51c05f3103">
+      <ID>Monthly Rent</ID>
+      <Name>Орендна плата</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="4dcb005a-1fc4-4799-bb3a-a49cb6d8cd08">
+          <DataType>Double</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="8945dbd9-6994-4ed3-9cbc-6d8da3157670">
+            <TableID>dbo_Dim_Contract</TableID>
+            <ColumnID>MonthlyRent</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="36ad89c2-380d-4bba-8a78-d72585d53082">
+        <DataType>WChar</DataType>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="a05c6bcd-8f03-4df6-a305-eb5017bd0b9f">
+          <TableID>dbo_Dim_Contract</TableID>
+          <ColumnID>MonthlyRent</ColumnID>
+        </Source>
+      </NameColumn>
+      <OrderBy>Key</OrderBy>
+      <AttributeHierarchyEnabled>false</AttributeHierarchyEnabled>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="9965cb1f-49fa-40b8-ae84-d733cd861bcc">
+      <ID>Deposit</ID>
+      <Name>Депозит</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="c94dedfe-2d69-42c5-b51d-649e88da8646">
+          <DataType>Double</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="8a1c0256-159d-4e50-b6aa-879ff6665ee9">
+            <TableID>dbo_Dim_Contract</TableID>
+            <ColumnID>Deposit</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="86a7cea8-c099-467b-a99a-c4acb1a5e2b3">
+        <DataType>WChar</DataType>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="ff648a7a-d659-4e2c-919a-c99d37c71e51">
+          <TableID>dbo_Dim_Contract</TableID>
+          <ColumnID>Deposit</ColumnID>
+        </Source>
+      </NameColumn>
+      <OrderBy>Key</OrderBy>
+      <AttributeHierarchyEnabled>false</AttributeHierarchyEnabled>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="793decf2-febc-408b-9f8f-c289fa693f1d">
+      <ID>Contract Period</ID>
+      <Name>Період дії</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="a46eadd2-9a82-4424-ba1e-2495b42846c4">
+          <DataType>WChar</DataType>
+          <DataSize>30</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="30d5e383-68f0-4c6a-a4f8-a8956ae90d68">
+            <TableID>dbo_Dim_Contract</TableID>
+            <ColumnID>PeriodLabel</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <AttributeHierarchyEnabled>false</AttributeHierarchyEnabled>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+  </Attributes>
+  <Hierarchies>
+    <Hierarchy dwd:design-time-name="cd3d84c0-589c-44c8-9955-d322060c6cb5">
+      <ID>By Duration</ID>
+      <Name>За тривалістю</Name>
+      <Levels>
+        <Level dwd:design-time-name="801995c8-808e-4546-9cc5-1d9658978675">
+          <ID>Duration Category</ID>
+          <Name>Тривалість</Name>
+          <SourceAttributeID>Duration Category</SourceAttributeID>
+        </Level>
+        <Level dwd:design-time-name="897e17c0-f43e-4614-9125-3b773355df88">
+          <ID>Contract</ID>
+          <Name>Договір</Name>
+          <SourceAttributeID>Contract</SourceAttributeID>
+        </Level>
+      </Levels>
+    </Hierarchy>
+    <Hierarchy dwd:design-time-name="d2f6f65c-4fc6-4414-a9ee-ed8a8125e040">
+      <ID>By Sign Year</ID>
+      <Name>За роком підписання</Name>
+      <Levels>
+        <Level dwd:design-time-name="0a9e8ed4-638f-4ef2-b032-3c468a42369b">
+          <ID>Sign Year</ID>
+          <Name>Рік</Name>
+          <SourceAttributeID>Sign Year</SourceAttributeID>
+        </Level>
+        <Level dwd:design-time-name="c83d43f6-9802-4244-a18f-6e6bed2e076f">
+          <ID>Contract</ID>
+          <Name>Договір</Name>
+          <SourceAttributeID>Contract</SourceAttributeID>
+        </Level>
+      </Levels>
+    </Hierarchy>
+  </Hierarchies>
+  <ddl300:ProcessingState>Unprocessed</ddl300:ProcessingState>
+</Dimension>

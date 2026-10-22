@@ -1,0 +1,26 @@
+﻿// Тест продуктивності куба: ті самі питання, що й у PERFORMANCE_TEST.sql (OLTP і сховище).
+//
+// Холодний кеш перед кожним запитом — XMLA-команда (SSMS: New Query -> XMLA, підключення Analysis Services):
+//   <ClearCache xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+//     <Object><DatabaseID>Rental_SSAS</DatabaseID></Object>
+//   </ClearCache>
+//
+// Точний час виконання: після запиту в окремому вікні MDX виконати DMV
+//   SELECT SESSION_SPID, COMMAND_ELAPSED_TIME_MS, COMMAND_TEXT FROM $system.DISCOVER_COMMANDS
+// (рядок із текстом потрібного запиту, колонка COMMAND_ELAPSED_TIME_MS).
+
+// Запит 1. Сума рахунків і сплачено по роках і групах типів приміщень
+SELECT {[Measures].[Сума рахунків], [Measures].[Сплачено]} ON COLUMNS,
+       NON EMPTY ([Період].[Календар].[Рік].Members, [Приміщення].[Група типів].[Група типів].Members) ON ROWS
+FROM [Оренда];
+
+// Запит 2. Топ-10 боржників
+SELECT {[Measures].[Борг]} ON COLUMNS,
+       TopCount([Орендар].[Орендар].[Орендар].Members, 10, [Measures].[Борг]) ON ROWS
+FROM [Оренда];
+
+// Запит 3. Завантаженість і дохід по містах і місяцях 2025 року
+SELECT {[Measures].[Завантаженість], [Measures].[Дохід від оренди]} ON COLUMNS,
+       NON EMPTY ([Приміщення].[Місто].[Місто].Members,
+                  Descendants([Період].[Календар].[Рік].&[2025], [Період].[Календар].[Місяць])) ON ROWS
+FROM [Оренда];

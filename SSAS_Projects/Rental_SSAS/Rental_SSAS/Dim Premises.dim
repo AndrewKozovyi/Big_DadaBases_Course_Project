@@ -1,0 +1,521 @@
+﻿<Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="2633761f-c762-4956-a69a-8f856fa78db6" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Dim Premises</ID>
+  <Name>Приміщення</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Description>Приміщення; зміни ціни, площі, типу й кімнат зберігаються як нові версії (SCD Type 2)</Description>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <Source xsi:type="DataSourceViewBinding" dwd:design-time-name="7730dc5c-ef12-4003-a0e5-ed780a43fc28">
+    <DataSourceViewID>RentalDW</DataSourceViewID>
+  </Source>
+  <UnknownMember>Hidden</UnknownMember>
+  <CurrentStorageMode>Molap</CurrentStorageMode>
+  <UnknownMemberName>Невідомо</UnknownMemberName>
+  <Attributes>
+    <Attribute dwd:design-time-name="abbcd6ff-c1c1-4da5-be77-87979d0ceeaa">
+      <ID>Premises Version</ID>
+      <Name>Версія приміщення</Name>
+      <Description>Сурогатний ключ: одна версія рядка SCD2</Description>
+      <Usage>Key</Usage>
+      <EstimatedCount>5020</EstimatedCount>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="3baa636e-422e-4747-afc9-71562faf72ce">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="ccc2ce27-946b-4e9c-94e7-23d0b4b3d29a">
+            <TableID>dbo_Dim_Premises</TableID>
+            <ColumnID>PremisesKey</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="12ddaa8b-4bde-459f-8072-5c8d10d387c5">
+        <DataType>WChar</DataType>
+        <DataSize>300</DataSize>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="34099b09-7079-4bfd-a07a-fcfeed93f0f1">
+          <TableID>dbo_Dim_Premises</TableID>
+          <ColumnID>VersionLabel</ColumnID>
+        </Source>
+      </NameColumn>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="dc01c2b9-dc79-4d3d-a842-852d53c7e0e2">
+          <AttributeID>Premises</AttributeID>
+          <Name>Приміщення</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="50c69f5a-3e30-476f-9711-ea1d7f765b9b">
+          <AttributeID>Area Category</AttributeID>
+          <Name>Категорія площі</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="8a1d464a-9920-42c7-acad-25a305cc0542">
+          <AttributeID>Price Category</AttributeID>
+          <Name>Цінова категорія</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="895f7048-042a-4b88-8458-32fc149ab1ef">
+          <AttributeID>Is Current</AttributeID>
+          <Name>Версія запису</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="e8301db7-75e0-438c-a8ba-a7511a817885">
+          <AttributeID>Area</AttributeID>
+          <Name>Площа м2</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="4af96fb3-d4fb-4b63-90f0-7548d21065b2">
+          <AttributeID>Monthly Price</AttributeID>
+          <Name>Ціна оренди</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="e3dd0004-2771-44f6-9fca-df3035c2e671">
+          <AttributeID>Rooms</AttributeID>
+          <Name>Кількість кімнат</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="adcb576c-5bf8-422e-88fe-b687ee8d47df">
+          <AttributeID>Valid From</AttributeID>
+          <Name>Діє з</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="135a014b-efc8-4f32-b04a-60a2c56b7b9f">
+          <AttributeID>Valid To</AttributeID>
+          <Name>Діє до</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>Key</OrderBy>
+      <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="f8b40407-5d5b-46ba-9d40-d5e80ede0e4e">
+      <ID>Premises</ID>
+      <Name>Приміщення</Name>
+      <Description>Бізнес-ключ: об'єднує всі версії приміщення</Description>
+      <EstimatedCount>5000</EstimatedCount>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="5a436b1a-9468-4f8e-a3af-f2115007911b">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="5bfa6687-aa49-443c-86a7-2840cce36c6f">
+            <TableID>dbo_Dim_Premises</TableID>
+            <ColumnID>PremisesID</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="b1a304ab-70bf-4651-a06e-e3563c6ac18e">
+        <DataType>WChar</DataType>
+        <DataSize>260</DataSize>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="37c8d906-e946-472a-af85-b57713a39b85">
+          <TableID>dbo_Dim_Premises</TableID>
+          <ColumnID>PremisesLabel</ColumnID>
+        </Source>
+      </NameColumn>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="1b971e80-692e-4206-a3cc-ecf954b5e206">
+          <AttributeID>City</AttributeID>
+          <Name>Місто</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="d7ee1c8c-025e-467b-ae55-5d08becc782e">
+          <AttributeID>Premises Type</AttributeID>
+          <Name>Тип приміщення</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="a554fbed-fc33-4327-9b5a-d718b6ae05bf">
+          <AttributeID>Floor Category</AttributeID>
+          <Name>Поверховість</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="0f30f45c-4901-4b5e-b028-510c974701f8">
+          <AttributeID>Address</AttributeID>
+          <Name>Адреса</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="e45d4769-ef85-42a1-9ecc-baf488114d25">
+          <AttributeID>Floor</AttributeID>
+          <Name>Поверх</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="204c0790-a561-4d88-a13b-e50daf9658e5">
+      <ID>City</ID>
+      <Name>Місто</Name>
+      <EstimatedCount>10</EstimatedCount>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="a1e542d5-6c4a-4a75-8308-de692f200b01">
+          <DataType>WChar</DataType>
+          <DataSize>50</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="d73290fc-7499-4f81-b838-2ad50f84c68c">
+            <TableID>dbo_Dim_Premises</TableID>
+            <ColumnID>City</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="499d6598-5af9-4d13-9c3b-035f4c146eda">
+      <ID>Premises Type</ID>
+      <Name>Тип приміщення</Name>
+      <EstimatedCount>18</EstimatedCount>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="a8aeccc8-2d28-49f7-9f6b-a5714c343261">
+          <DataType>WChar</DataType>
+          <DataSize>100</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="e2c629d8-5a7e-4589-b476-4c34d31f7cdb">
+            <TableID>dbo_Dim_Premises</TableID>
+            <ColumnID>PremisesType</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="195446a2-fb18-4571-881a-5120196de3d6">
+          <AttributeID>Type Group</AttributeID>
+          <Name>Група типів</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="475d7025-6f0a-4499-967a-0c6d82966d82">
+      <ID>Type Group</ID>
+      <Name>Група типів</Name>
+      <EstimatedCount>5</EstimatedCount>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="c8f1db90-5277-451f-b4c2-d1958d046fc3">
+          <DataType>WChar</DataType>
+          <DataSize>50</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="03a6b0fc-6f63-482a-8d49-5cab90bdc566">
+            <TableID>dbo_Dim_Premises</TableID>
+            <ColumnID>TypeGroup</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="e18feff1-a559-4933-a4f2-7529ac4a1a72">
+      <ID>Floor Category</ID>
+      <Name>Поверховість</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="51de7898-7b7e-4e53-bdfb-f4344a03ea1b">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="2cb8e65d-1bbe-4a5a-942b-65a77092624d">
+            <TableID>dbo_Dim_Premises</TableID>
+            <ColumnID>FloorOrder</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="c7756cff-96ac-4961-b51b-754fe859f26f">
+        <DataType>WChar</DataType>
+        <DataSize>30</DataSize>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="b188ab1e-8f90-4241-b645-8097c3a98194">
+          <TableID>dbo_Dim_Premises</TableID>
+          <ColumnID>FloorCategory</ColumnID>
+        </Source>
+      </NameColumn>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="4a934fca-b1a0-464b-9111-d28747fdf4c7">
+      <ID>Area Category</ID>
+      <Name>Категорія площі</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="66645765-2736-4b91-9aa7-368f7ec8952c">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="05b40ff3-acf9-49d8-9d04-a9b0b0bfaa28">
+            <TableID>dbo_Dim_Premises</TableID>
+            <ColumnID>AreaOrder</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="aa4332c7-8542-4569-86ea-8294ca8d8c58">
+        <DataType>WChar</DataType>
+        <DataSize>30</DataSize>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="6197d71c-bad6-438b-bee1-013743f1392b">
+          <TableID>dbo_Dim_Premises</TableID>
+          <ColumnID>AreaCategory</ColumnID>
+        </Source>
+      </NameColumn>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="51228b52-d2b9-4358-9525-d21e06f790ea">
+      <ID>Price Category</ID>
+      <Name>Цінова категорія</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="76095cc0-2c52-4548-9d21-70a49ca9d7a8">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="d9002c25-0cd2-41dc-9028-82340e7e96cc">
+            <TableID>dbo_Dim_Premises</TableID>
+            <ColumnID>PriceOrder</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="b4c508db-5351-461a-b673-e638458b6049">
+        <DataType>WChar</DataType>
+        <DataSize>30</DataSize>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="951bb417-b578-4181-906d-df7128f81c51">
+          <TableID>dbo_Dim_Premises</TableID>
+          <ColumnID>PriceCategory</ColumnID>
+        </Source>
+      </NameColumn>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="e5b3665b-34af-4398-b089-cdf505eada9b">
+      <ID>Is Current</ID>
+      <Name>Версія запису</Name>
+      <Description>Поточна чи історична версія SCD2</Description>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="16055962-0a5c-437c-b07c-9a600a61d650">
+          <DataType>Boolean</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="363ebe13-df8b-498a-8579-6ffedbd74a20">
+            <TableID>dbo_Dim_Premises</TableID>
+            <ColumnID>IsCurrent</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="64bc8eed-9459-4a89-82a0-d3ba8488aef5">
+        <DataType>WChar</DataType>
+        <DataSize>20</DataSize>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="008e08c9-2cb5-444c-825f-27cb14e824aa">
+          <TableID>dbo_Dim_Premises</TableID>
+          <ColumnID>CurrentLabel</ColumnID>
+        </Source>
+      </NameColumn>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="1aef6ce9-cd00-4077-b5d0-c8bf46cfe9de">
+      <ID>Address</ID>
+      <Name>Адреса</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="654d571d-df6d-4653-a050-5b7e62262523">
+          <DataType>WChar</DataType>
+          <DataSize>200</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="4ddb6d60-31db-4b51-9a26-e75c34a83967">
+            <TableID>dbo_Dim_Premises</TableID>
+            <ColumnID>Address</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <AttributeHierarchyEnabled>false</AttributeHierarchyEnabled>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="59dab40b-c6ee-40d0-8f5a-8e43bb95ea7a">
+      <ID>Rooms</ID>
+      <Name>Кількість кімнат</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="0b26fd13-5c41-48bb-9d8a-f1c81f07f762">
+          <DataType>SmallInt</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="b6130a22-5c41-4b75-967d-3ed5f6033a14">
+            <TableID>dbo_Dim_Premises</TableID>
+            <ColumnID>RoomsCount</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="f139bf66-b423-4547-abb5-38f004171fad">
+        <DataType>WChar</DataType>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="2e45289b-465a-43a7-aaff-a5b975593172">
+          <TableID>dbo_Dim_Premises</TableID>
+          <ColumnID>RoomsCount</ColumnID>
+        </Source>
+      </NameColumn>
+      <OrderBy>Key</OrderBy>
+      <AttributeHierarchyEnabled>false</AttributeHierarchyEnabled>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="a9f6b53b-9d94-4b2e-a690-0c37cb594e0c">
+      <ID>Floor</ID>
+      <Name>Поверх</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="65a3c43f-f666-43e3-9ffa-51145cc1d708">
+          <DataType>WChar</DataType>
+          <DataSize>10</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="ca73d83b-ac98-426a-9284-3e4bc2d50190">
+            <TableID>dbo_Dim_Premises</TableID>
+            <ColumnID>FloorText</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <AttributeHierarchyEnabled>false</AttributeHierarchyEnabled>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="e2235a02-31ec-4238-ae5e-1e4446fc42d4">
+      <ID>Area</ID>
+      <Name>Площа м2</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="fed9be73-2fb7-4d2d-9889-6f4eaaefb21a">
+          <DataType>Double</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="3132f753-5879-46ad-853e-9b38fb6e88e1">
+            <TableID>dbo_Dim_Premises</TableID>
+            <ColumnID>Area</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="238ce452-5fb3-4bd0-a61f-a9ce214ccb43">
+        <DataType>WChar</DataType>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="68ba5b91-2e07-4855-adf7-f4ae795e07a2">
+          <TableID>dbo_Dim_Premises</TableID>
+          <ColumnID>Area</ColumnID>
+        </Source>
+      </NameColumn>
+      <OrderBy>Key</OrderBy>
+      <AttributeHierarchyEnabled>false</AttributeHierarchyEnabled>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="231461c9-a9a6-414a-b15b-d8efaebb1925">
+      <ID>Monthly Price</ID>
+      <Name>Ціна оренди</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="c3d2ec83-ef64-4b45-8639-b694946e095a">
+          <DataType>Double</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="57e8d27a-3659-44bb-a4f7-32e2f193600f">
+            <TableID>dbo_Dim_Premises</TableID>
+            <ColumnID>MonthlyPrice</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="99b9f1c7-9b76-436f-8650-1d12c172b778">
+        <DataType>WChar</DataType>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="15daf6c8-4820-4b9a-b188-99925632e62c">
+          <TableID>dbo_Dim_Premises</TableID>
+          <ColumnID>MonthlyPrice</ColumnID>
+        </Source>
+      </NameColumn>
+      <OrderBy>Key</OrderBy>
+      <AttributeHierarchyEnabled>false</AttributeHierarchyEnabled>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="19daaa41-c41b-4da3-886a-2419e713e5f7">
+      <ID>Valid From</ID>
+      <Name>Діє з</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="40166b94-0ea2-45e9-861f-ae808f2ad050">
+          <DataType>Date</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="441b3e2f-8070-401c-a65c-029d506aef10">
+            <TableID>dbo_Dim_Premises</TableID>
+            <ColumnID>ValidFrom</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="19f4d5c0-dd2f-4c82-813b-f56b55c4b855">
+        <DataType>WChar</DataType>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="2089e60f-cd06-4e27-a366-c61b06454d0f">
+          <TableID>dbo_Dim_Premises</TableID>
+          <ColumnID>ValidFrom</ColumnID>
+        </Source>
+      </NameColumn>
+      <OrderBy>Key</OrderBy>
+      <AttributeHierarchyEnabled>false</AttributeHierarchyEnabled>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="3fe99a5d-d53c-4159-a81f-763bceaa4647">
+      <ID>Valid To</ID>
+      <Name>Діє до</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="df0024c7-2792-46b6-895c-bc17a4382c75">
+          <DataType>Date</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="c49360c3-6285-4422-9da3-b10c36d72ffe">
+            <TableID>dbo_Dim_Premises</TableID>
+            <ColumnID>ValidTo</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="a9a414fe-b579-43a9-ab37-a8e28b2b2589">
+        <DataType>WChar</DataType>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="e4de8b09-056e-4de6-9fba-e99f48f1f6d7">
+          <TableID>dbo_Dim_Premises</TableID>
+          <ColumnID>ValidTo</ColumnID>
+        </Source>
+      </NameColumn>
+      <OrderBy>Key</OrderBy>
+      <AttributeHierarchyEnabled>false</AttributeHierarchyEnabled>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+  </Attributes>
+  <Hierarchies>
+    <Hierarchy dwd:design-time-name="a9d3a309-c530-4e60-97e6-94286eabd024">
+      <ID>Geography</ID>
+      <Name>Географія</Name>
+      <Levels>
+        <Level dwd:design-time-name="a8c63429-2024-4963-aa0a-f35132a183e6">
+          <ID>City</ID>
+          <Name>Місто</Name>
+          <SourceAttributeID>City</SourceAttributeID>
+        </Level>
+        <Level dwd:design-time-name="b1ea8a19-af9a-4982-9647-96c87a9fdfa4">
+          <ID>Premises</ID>
+          <Name>Приміщення</Name>
+          <SourceAttributeID>Premises</SourceAttributeID>
+        </Level>
+      </Levels>
+    </Hierarchy>
+    <Hierarchy dwd:design-time-name="cdd159a1-f317-4fd5-a6f5-4ed42cb55c8c">
+      <ID>By Type</ID>
+      <Name>За типом</Name>
+      <Levels>
+        <Level dwd:design-time-name="791ba2b1-70b9-4ec7-8b6c-7f5bfe15afac">
+          <ID>Type Group</ID>
+          <Name>Група</Name>
+          <SourceAttributeID>Type Group</SourceAttributeID>
+        </Level>
+        <Level dwd:design-time-name="7eb9b8bd-5082-4232-817b-4ed8c5c15b67">
+          <ID>Premises Type</ID>
+          <Name>Тип</Name>
+          <SourceAttributeID>Premises Type</SourceAttributeID>
+        </Level>
+        <Level dwd:design-time-name="35cfd38c-ff56-408d-9755-09f8b510b755">
+          <ID>Premises</ID>
+          <Name>Приміщення</Name>
+          <SourceAttributeID>Premises</SourceAttributeID>
+        </Level>
+      </Levels>
+    </Hierarchy>
+  </Hierarchies>
+  <ddl300:ProcessingState>Unprocessed</ddl300:ProcessingState>
+</Dimension>
