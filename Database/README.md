@@ -56,6 +56,8 @@ SELECT * FROM dbo.InvoiceStatus;
 | SQL_INLINE_TABLE_VALUED_FUNCTION | 1 |
 | SQL_STORED_PROCEDURE | 11 |
 
+Тестування обмежень і тригерів — `TEST_CONSTRAINTS.sql`: спроби вставити некоректні дані в транзакції з `ROLLBACK`. Очікувані помилки: `50001` (тригер `TR_Contract_Validate`, перетин договорів) і порушення `CK_Tenant_Phone`. Дані не змінюються.
+
 ## Повторний запуск
 
 - `CREATE_DATABASE.sql` створює базу лише тоді, коли її ще немає. Повторно запускати безпечно.
